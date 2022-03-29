@@ -1155,6 +1155,19 @@
     fadeIn
   </a>
   
+    <nav class="md-nav" aria-label="fadeIn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#warning-on-fadein-and-rolling-restarts" class="md-nav__link">
+    Warning on fadeIn and Rolling Restarts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2567,6 +2580,19 @@
   <a href="#fadein" class="md-nav__link">
     fadeIn
   </a>
+  
+    <nav class="md-nav" aria-label="fadeIn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#warning-on-fadein-and-rolling-restarts" class="md-nav__link">
+    Warning on fadeIn and Rolling Restarts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4575,6 +4601,16 @@ the fade-in curve, based on the following equation:</p>
 <div class="highlight"><pre><span></span><code>fadeIn(&quot;3m&quot;)
 fadeIn(&quot;3m&quot;, 1.5)
 </code></pre></div>
+<h4 id="warning-on-fadein-and-rolling-restarts">Warning on fadeIn and Rolling Restarts<a class="headerlink" href="#warning-on-fadein-and-rolling-restarts" title="Permanent link">&para;</a></h4>
+<p>Traffic fade-in has the potential to skew the traffic to your backend pods in case of a rolling restart 
+(<code>kubectl rollout restart</code>), because it is very likely that the rolling restart is going faster than the
+fade-in duration. The image below shows an example of a rolling restart for a four-pod deployment (A, B, C, D)
+into (E, F, G, H), and the traffic share of each pod over time. While the ramp-up of the new pods is ongoing,
+the remaining old pods will receive a largely increased traffic share (especially the last one, D in this
+example), as well as an over-propotional traffic share for the first pod in the rollout (E).</p>
+<p>To make rolling restarts safe, you need to slow them down by setting <code>spec.minReadySeconds</code> on the pod spec
+of your deployment or stackset, according to your fadeIn duration. </p>
+<p><img alt="Rolling Restart and Fade-In" src="../../img/fadein_traffic_skew.png" /></p>
 <h2 id="endpointcreated">endpointCreated<a class="headerlink" href="#endpointcreated" title="Permanent link">&para;</a></h2>
 <p>This filter marks the creation time of a load balanced endpoint. When used together with the fadeIn
 filter, it prevents missing the detection of a new backend instance with the same hostname. This filter is
