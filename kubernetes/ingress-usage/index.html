@@ -1694,7 +1694,7 @@ Ingress to RouteGroups.</p>
 <tr>
 <td>zalando.org/skipper-ingress-path-mode</td>
 <td><code>path-prefix</code></td>
-<td>defaults to <code>kubernetes-ingress</code>, <a href="#ingress-path-handling">see available choices</a>, to change the default use <code>-kubernetes-path-mode</code></td>
+<td>(<em>deprecated</em>) please use <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types">Ingress version 1 pathType option</a>, which defaults to ImplementationSpecific and does not change the behavior. Skipper&rsquo;s path-mode defaults to <code>kubernetes-ingress</code>, <a href="#ingress-path-handling">see available choices</a>, to change the default use <code>-kubernetes-path-mode</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -1736,7 +1736,7 @@ Ingress to RouteGroups.</p>
 <p>HTTP host header is defined within the rules <code>host</code> section and this
 route will match by http <code>Host: app-default.example.org</code> and route to
 endpoints selected by the Kubernetes service <code>app-svc</code> on port <code>80</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
@@ -1746,8 +1746,11 @@ endpoints selected by the Kubernetes service <code>app-svc</code> on port <code>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>To have 2 routes with different <code>Host</code> headers serving the same
 backends, you have to specify 2 entries in the rules section, as
@@ -1757,7 +1760,7 @@ bare metal datacenters to cloud providers or inter cloud or intra
 cloud providers migrations. Examples are AWS account migration, AWS to
 GCP migration, GCP to bare metal migration or bare metal to Alibaba
 Cloud migration.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
@@ -1767,14 +1770,20 @@ Cloud migration.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
   <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">foo.example.org</span>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h3 id="multiple-ingresses-defining-the-same-route">Multiple Ingresses defining the same route<a class="headerlink" href="#multiple-ingresses-defining-the-same-route" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
@@ -1789,43 +1798,56 @@ for each of the ingresses.</p>
 ingress points to a service with no endpoints and the other to a service with
 endpoints. (Most likely service-x was renamed to service-x-live and the old
 ingress was forgot).</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x</span>
 <span class="nt">spec</span><span class="p">:</span>
   <span class="nt">rules</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x.example.org</span>
-      <span class="l l-Scalar l-Scalar-Plain">http</span><span class="p p-Indicator">:</span>
-        <span class="nt">paths</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-            <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x</span> <span class="c1"># this service has 0 endpoints</span>
-            <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">http</span><span class="p">:</span>
+      <span class="nt">paths</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x</span> <span class="c1"># this service has 0 endpoints</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>&#x200B;</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x-live</span>
 <span class="nt">spec</span><span class="p">:</span>
   <span class="nt">rules</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x.example.org</span>
-      <span class="l l-Scalar l-Scalar-Plain">http</span><span class="p p-Indicator">:</span>
-        <span class="nt">paths</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-            <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x-live</span>
-            <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">http</span><span class="p">:</span>
+      <span class="nt">paths</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service-x-live</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="ingress-path-handling">Ingress path handling<a class="headerlink" href="#ingress-path-handling" title="Permanent link">&para;</a></h2>
-<p>Ingress paths can be interpreted in four different modes:</p>
+<p>Skipper supports all <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types">Kubernetes
+path-types</a>
+as documented in Kubernetes documentation.</p>
+<p>Ingress paths can be interpreted in five different modes:</p>
 <ol>
+<li><code>pathType: Prefix</code> results in <a href="../../reference/predicates/#pathsubtree">PathSubtree predicate</a>)</li>
+<li><code>pathType: Exact</code> results in <a href="../../reference/predicates/#path">Path predicate</a>)</li>
+<li><code>pathType: ImplementationSpecific</code></li>
 <li>based on the kubernetes ingress specification</li>
 <li>as plain regular expression</li>
-<li>as a path prefix</li>
+<li>as a path prefix (same as <code>pathType: Prefix</code> and results in <a href="../../reference/predicates/#pathsubtree">PathSubtree</a>)</li>
 </ol>
-<p>The default is the kubernetes ingress mode. It can be changed by a startup option
+<p>The default is 3.1 the kubernetes ingress mode. It can be changed by a startup option
 to any of the other modes, and the individual ingress rules can also override the
-default behavior with the zalando.org/skipper-ingress-path-mode annotation.</p>
+default behavior with the zalando.org/skipper-ingress-path-mode annotation. You can
+also set for each path rule a different Kubernetes <code>pathType</code> like <code>Prefix</code> and <code>Exact</code>.</p>
 <p>E.g.:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">zalando.org/skipper-ingress-path-mode: path-prefix</span>
 </code></pre></div>
@@ -1855,7 +1877,7 @@ path.</p>
 <li><strong>Predicates</strong> change the route matching, beyond normal ingress definitions</li>
 </ul>
 <p>This example shows how to add predicates and filters:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -1868,10 +1890,15 @@ path.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="custom-routes">Custom Routes<a class="headerlink" href="#custom-routes" title="Permanent link">&para;</a></h2>
+<p>Please consider using <a href="../routegroups/">RouteGroups</a>, instead of custom
+routes!</p>
 <p>Custom routes is a way of extending the default routes configured for
 an ingress resource.</p>
 <p>Sometimes you just want to return a header, redirect or even static
@@ -1911,7 +1938,7 @@ backend defined, because the created route from the annotation
 instead of the 2 Predicates
 <code>Host("^app-default[.]example[.]org$") &amp;&amp; Path("/")</code>, that will be
 created for the ingress backend.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
@@ -1925,9 +1952,12 @@ created for the ingress backend.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <h4 id="redirect-a-specific-path-from-ingress">Redirect a specific path from ingress<a class="headerlink" href="#redirect-a-specific-path-from-ingress" title="Permanent link">&para;</a></h4>
 <p>Sometimes you want to have a redirect from
@@ -1938,7 +1968,7 @@ code 308 from <code>http://app-default.example.org/myredirect</code> to
 <code>https://somewhere.example.org/another/path</code>, other paths will not be
 redirected and passed to the backend selected by <code>serviceName=app-svc</code> and
 <code>servicePort=80</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
@@ -1952,9 +1982,12 @@ redirected and passed to the backend selected by <code>serviceName=app-svc</code
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <h3 id="return-static-content">Return static content<a class="headerlink" href="#return-static-content" title="Permanent link">&para;</a></h3>
 <p>The following example sets a response header <code>X: bar</code>, a response body
@@ -1968,7 +2001,7 @@ which are available, otherwise Skipper would not accept the entire
 route definition from the ingress object for safety reasons.</p>
 <h3 id="cors-example">CORS example<a class="headerlink" href="#cors-example" title="Permanent link">&para;</a></h3>
 <p>This example shows how to add a custom route for handling <code>OPTIONS</code> requests.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -1985,8 +2018,11 @@ route definition from the ingress object for safety reasons.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>This will generate a custom route for the ingress which looks like this:</p>
 <div class="highlight"><pre><span></span><code>Host(/^app-default[.]example[.]org$/) &amp;&amp; Method(&quot;OPTIONS&quot;) -&gt;
@@ -2007,7 +2043,7 @@ use multiple routes definitions.</p>
 <p><strong>Disclaimer</strong>: This feature works only with having different <code>Path*</code>
 predicates in ingress, if there are no paths rules defined. For
 example this will <strong>not</strong> work:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
@@ -2015,21 +2051,27 @@ example this will <strong>not</strong> work:</p>
     <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper</span>
     <span class="nt">zalando.org/skipper-routes</span><span class="p">:</span> <span class="p p-Indicator">|</span>
        <span class="no">redirect1: Path(&quot;/foo/&quot;) -&gt; redirectTo(308, &quot;/bar/&quot;) -&gt; &lt;shunt&gt;;</span>
-  <span class="nt">spec</span><span class="p">:</span>
-    <span class="nt">rules</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">foo.bar</span>
-        <span class="nt">http</span><span class="p">:</span>
-          <span class="nt">paths</span><span class="p">:</span>
-            <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/something/</span>
-              <span class="nt">backend</span><span class="p">:</span>
-                <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">something</span>
-                <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
-            <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/else/</span>
-              <span class="nt">backend</span><span class="p">:</span>
-                <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">else</span>
-                <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">rules</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">foo.bar</span>
+    <span class="nt">http</span><span class="p">:</span>
+      <span class="nt">paths</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/something</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+        <span class="nt">backend</span><span class="p">:</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">something</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+      <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/else</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+        <span class="nt">backend</span><span class="p">:</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">else</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
-<p>A possible solution will be a skipper route CRD: <a href="https://github.com/zalando/skipper/issues/660">https://github.com/zalando/skipper/issues/660</a></p>
+<p>A possible solution is to use skipper&rsquo;s <a href="../routegroups/">RouteGroups</a>.</p>
 <h2 id="filters-basic-http-manipulations">Filters - Basic HTTP manipulations<a class="headerlink" href="#filters-basic-http-manipulations" title="Permanent link">&para;</a></h2>
 <p>HTTP manipulations are done by using skipper filters. Changes can be
 done in the request path, meaning request to your backend or in the
@@ -2156,7 +2198,7 @@ documented.</p>
 </code></pre></div>
 
 <p>The ingress spec would look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2168,8 +2210,11 @@ documented.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h4 id="rate-breaker">Rate Breaker<a class="headerlink" href="#rate-breaker" title="Permanent link">&para;</a></h4>
 <p>The <a href="../../reference/filters/#ratebreaker">rateBreaker</a>
@@ -2182,7 +2227,7 @@ documented.</p>
 </code></pre></div>
 
 <p>The ingress spec would look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2194,8 +2239,11 @@ documented.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h3 id="ratelimits">Ratelimits<a class="headerlink" href="#ratelimits" title="Permanent link">&para;</a></h3>
 <p>There are two kind of ratelimits:</p>
@@ -2218,7 +2266,7 @@ and in our <a href="../../tutorials/ratelimit/">ratelimit tutorial</a>.</p>
 <p>The example shows 20 calls per hour per client, based on
 X-Forwarded-For header or IP incase there is no X-Forwarded-For header
 set, are allowed to each skipper instance for the given ingress.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2230,14 +2278,17 @@ set, are allowed to each skipper instance for the given ingress.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>If you need to rate limit service to service communication and
 you use Authorization headers to protect your backend from your
 clients, then you can pass a 3 parameter to group clients by &ldquo;Authorization
 Header&rdquo;:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2249,13 +2300,16 @@ Header&rdquo;:</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h4 id="service-ratelimits">Service Ratelimits<a class="headerlink" href="#service-ratelimits" title="Permanent link">&para;</a></h4>
 <p>The example shows 50 calls per minute are allowed to each skipper
 instance for the given ingress.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2267,8 +2321,11 @@ instance for the given ingress.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h4 id="cluster-ratelimits">Cluster Ratelimits<a class="headerlink" href="#cluster-ratelimits" title="Permanent link">&para;</a></h4>
 <p>Cluster ratelimits are eventual consistent and require the flag
@@ -2276,7 +2333,7 @@ instance for the given ingress.</p>
 <h5 id="service">Service<a class="headerlink" href="#service" title="Permanent link">&para;</a></h5>
 <p>The example shows 50 calls per minute are allowed to pass this ingress
 rule to the backend.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2288,13 +2345,16 @@ rule to the backend.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h5 id="client">Client<a class="headerlink" href="#client" title="Permanent link">&para;</a></h5>
 <p>The example shows 10 calls per hour are allowed per client,
 X-Forwarded-For header, to pass this ingress rule to the backend.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2306,12 +2366,15 @@ X-Forwarded-For header, to pass this ingress rule to the backend.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h4 id="path-ratelimit">Path ratelimit<a class="headerlink" href="#path-ratelimit" title="Permanent link">&para;</a></h4>
 <p>To ratelimit a specific path use a second ingress definition like</p>
-<p><div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<p><div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-default</span>
@@ -2321,10 +2384,13 @@ X-Forwarded-For header, to pass this ingress rule to the backend.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 <span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-login</span>
@@ -2337,8 +2403,11 @@ X-Forwarded-For header, to pass this ingress rule to the backend.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 or use <a href="../routegroups/">RouteGroups</a>.</p>
 <h2 id="shadow-traffic">Shadow Traffic<a class="headerlink" href="#shadow-traffic" title="Permanent link">&para;</a></h2>
@@ -2346,7 +2415,7 @@ or use <a href="../routegroups/">RouteGroups</a>.</p>
 production load, you can copy incoming requests to your new endpoint
 and ignore the responses from your new backend. This can be done by
 the <a href="../../reference/filters/#tee">tee()</a> and <a href="../../reference/filters/#teenf">teenf()</a> filters.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2358,8 +2427,11 @@ the <a href="../../reference/filters/#tee">tee()</a> and <a href="../../referenc
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="predicates">Predicates<a class="headerlink" href="#predicates" title="Permanent link">&para;</a></h2>
 <p><a href="../../reference/predicates/">Predicates</a>
@@ -2380,7 +2452,7 @@ query string in the URL has <code>version=alpha</code> set, for example
 <code>https://app-default.example.org/mypath?version=alpha</code>, the service
 <code>alpha-svc</code> will get the traffic, if not <code>prod-svc</code>.</p>
 <p>alpha-svc:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2392,11 +2464,14 @@ query string in the URL has <code>version=alpha</code> set, for example
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">alpha-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">alpha-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>prod-svc:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">prod-app</span>
@@ -2406,12 +2481,15 @@ query string in the URL has <code>version=alpha</code> set, for example
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">prod-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">prod-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h3 id="ip-whitelisting">IP Whitelisting<a class="headerlink" href="#ip-whitelisting" title="Permanent link">&para;</a></h3>
 <p>This ingress route will only allow traffic from networks 1.2.3.0/24 and 195.168.0.0/17</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2423,8 +2501,11 @@ query string in the URL has <code>version=alpha</code> set, for example
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="ab-test">A/B test<a class="headerlink" href="#ab-test" title="Permanent link">&para;</a></h2>
 <p>Implementing A/B testing is heavy. Skipper can help you to do
@@ -2438,7 +2519,7 @@ can be used to match the route based on the cookie. Like this you can
 have sticky sessions to either A or B for your clients.  This example
 shows to have 10% traffic using A and the rest using B.</p>
 <p>10% choice of setting the Cookie &ldquo;flavor&rdquo; to &ldquo;A&rdquo;:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2451,11 +2532,14 @@ shows to have 10% traffic using A and the rest using B.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">a-app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">a-app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>Rest is setting Cookie &ldquo;flavor&rdquo; to &ldquo;B&rdquo;:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2467,12 +2551,15 @@ shows to have 10% traffic using A and the rest using B.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">b-app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">b-app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>To be sticky, you have to create 2 ingress with predicate to match
 routes with the cookie we set before. For &ldquo;A&rdquo; this would be:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2484,11 +2571,14 @@ routes with the cookie we set before. For &ldquo;A&rdquo; this would be:</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">a-app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">a-app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>For &ldquo;B&rdquo; this would be:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2500,8 +2590,11 @@ routes with the cookie we set before. For &ldquo;A&rdquo; this would be:</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">b-app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">b-app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="blue-green-deployments">Blue-Green deployments<a class="headerlink" href="#blue-green-deployments" title="Permanent link">&para;</a></h2>
 <p>To do blue-green deployments you have to have control over traffic
@@ -2514,7 +2607,7 @@ simplicity this example shows 2 backends, which should be the default
 case for supporting blue-green deployments.</p>
 <p>In the following example <strong>my-app-1</strong> service will get <strong>80%</strong> of the traffic
 and <strong>my-app-2</strong> will get <strong>20%</strong> of the traffic:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-app</span>
@@ -2529,18 +2622,24 @@ and <strong>my-app-2</strong> will get <strong>20%</strong> of the traffic:</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-app-1</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-app</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-app-2</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-app-2</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
 </code></pre></div>
 <p>For more advanced blue-green deployments, check out our <a href="https://github.com/zalando-incubator/stackset-controller">stackset-controller</a>.</p>
 <h2 id="chaining-filters-and-predicates">Chaining Filters and Predicates<a class="headerlink" href="#chaining-filters-and-predicates" title="Permanent link">&para;</a></h2>
 <p>You can set multiple filters in a chain similar to the <a href="https://godoc.org/github.com/zalando/skipper/eskip">eskip format</a>.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2553,8 +2652,11 @@ and <strong>my-app-2</strong> will get <strong>20%</strong> of the traffic:</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="controlling-https-redirect">Controlling HTTPS redirect<a class="headerlink" href="#controlling-https-redirect" title="Permanent link">&para;</a></h2>
 <p>Skipper Ingress can provide HTTP-&gt;HTTPS redirection. Enabling it and setting the status code used by default can
@@ -2570,7 +2672,7 @@ based on these ingresses specs.</p>
   status code for the current ingress.</li>
 </ul>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2583,8 +2685,11 @@ based on these ingresses specs.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="load-balancer-algorithm">Load Balancer Algorithm<a class="headerlink" href="#load-balancer-algorithm" title="Permanent link">&para;</a></h2>
 <p>You can set the loadbalancer algorithm, which is used to find the next
@@ -2600,7 +2705,7 @@ available it would switch to another one.</p>
 <li><code>zalando.org/skipper-loadbalancer</code> <a href="../../reference/backends/#load-balancer-backend">see available choices</a></li>
 </ul>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -2612,8 +2717,11 @@ available it would switch to another one.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
                 
               

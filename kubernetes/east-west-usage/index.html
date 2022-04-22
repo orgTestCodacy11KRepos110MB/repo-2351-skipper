@@ -812,7 +812,7 @@ calls, bypassing your ingress loadbalancer and stay inside the
 cluster. You can connect via HTTP to your application based on its
 ingress configuration.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">demo</span>
@@ -823,8 +823,11 @@ ingress configuration.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>Or as a <a href="../routegroups/">RouteGroup</a>:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>
@@ -850,7 +853,7 @@ from inside a container:</p>
 </code></pre></div>
 <p>You can also use the same ingress or RouteGroup object to accept
 internal and external traffic:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">demo</span>
@@ -861,14 +864,20 @@ internal and external traffic:</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
   <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">demo.skipper.cluster.local</span>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <p>Or, again, as a <a href="../routegroups/">RouteGroup</a>:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>

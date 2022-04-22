@@ -730,6 +730,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#upgrades" class="md-nav__link">
+    Upgrades
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v0140" class="md-nav__link">
+    =v0.14.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1159,6 +1179,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#upgrades" class="md-nav__link">
+    Upgrades
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v0140" class="md-nav__link">
+    =v0.14.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1525,11 +1565,18 @@ skipper-ingress is allowed to listen on the hostnetwork.</p>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
   <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
 <span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1beta1</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
 <span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io</span>
+  <span class="nt">resources</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingresses</span>
+  <span class="nt">verbs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
 <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions</span>
   <span class="nt">resources</span><span class="p">:</span>
@@ -1554,7 +1601,7 @@ skipper-ingress is allowed to listen on the hostnetwork.</p>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
 <span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1beta1</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
@@ -1567,7 +1614,7 @@ skipper-ingress is allowed to listen on the hostnetwork.</p>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
   <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
 <span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1beta1</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RoleBinding</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress-hostnetwork-psp</span>
@@ -1785,7 +1832,7 @@ cluster service on TCP port 80. Besides skipper-ingress, deployment
 and service can not be reached from outside the cluster. Now we expose
 the application with Ingress to the external network:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># cat demo-ing.yaml</span>
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: skipper-demo
@@ -1795,8 +1842,11 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: skipper-demo
-          servicePort: <span class="m">80</span>
+          service:
+            name: skipper-demo
+            port:
+              number: <span class="m">80</span>
+        pathType: ImplementationSpecific
 </code></pre></div>
 <p>To deploy this ingress, you have to run:</p>
 <div class="highlight"><pre><span></span><code>kubectl create -f demo-ing.yaml
@@ -1829,7 +1879,7 @@ your ingress objects with the annotation
 <code>kubernetes.io/ingress.class: skipper</code> to make sure only skipper will
 serve the traffic.</p>
 <p>Example ingress:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">annotations</span><span class="p">:</span>
@@ -1841,8 +1891,11 @@ serve the traffic.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app-svc</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
 </code></pre></div>
 <h2 id="scoping-skipper-deployments-to-a-single-namespace">Scoping Skipper Deployments to a Single Namespace<a class="headerlink" href="#scoping-skipper-deployments-to-a-single-namespace" title="Permanent link">&para;</a></h2>
 <p>In some instances you might want skipper to only watch for ingress objects
@@ -1938,7 +1991,7 @@ down the IP (p.e. <code>10.3.11.28</code>), which you will need in CoreDNS setup
 <h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
 <p>If the setup is correct, skipper will protect the following ingress
 example with the <code>ClientIP</code> predicate:</p>
-<div class="highlight"><pre><span></span><code>apiVersion: extensions/v1beta1
+<div class="highlight"><pre><span></span><code>apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: demo
@@ -1949,8 +2002,11 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: example
-          servicePort: 80
+          service:
+            name: example
+            port:
+              number: 80
+        pathType: ImplementationSpecific
 </code></pre></div>
 <p>Your clients inside the cluster should call this example with
 <code>demo.skipper.cluster.local</code> in their host header. Example
@@ -2070,6 +2126,175 @@ the communication work with TCP and UDP to the specified <code>swarm-port</code>
   <span class="nt">hostPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9990</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">swarm-port</span>
   <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+</code></pre></div>
+<h2 id="upgrades">Upgrades<a class="headerlink" href="#upgrades" title="Permanent link">&para;</a></h2>
+<h3 id="v0140"><v0.14.0 to >=v0.14.0<a class="headerlink" href="#v0140" title="Permanent link">&para;</a></h3>
+<p>Kubernetes dataclient removes support for ingress v1beta1.
+What does it mean for you?</p>
+<ol>
+<li>If you run with enabled <code>-kubernetes-ingress-v1</code>, you won&rsquo;t need to
+  do anything and you can safely delete the flag while updating to
+  <code>&gt;=0.14.0</code>.</li>
+<li>If you use skipper as library and pass <code>KubernetesIngressV1: true</code>
+  via <code>kubernetes.Options</code> into <code>kubernetes.New()</code>, then you won&rsquo;t need to
+  do anything and you can safely delete passing the option while updating to
+  <code>&gt;=0.14.0</code>.</li>
+<li>If you use Ingress v1beta1 and run Kubernetes cluster version that
+  does not support ingress v1, then you can&rsquo;t update skipper to
+  <code>&gt;=0.14.0</code>, before you upgrade your Kubernetes cluster.</li>
+<li>If you use Ingress v1beta1 and run Kubernetes cluster version that
+  support ingress v1, then you need to allow skipper to access the new
+  APIs with a changed RBAC. See the guide below.</li>
+</ol>
+<p>If you are in case 4., you have to apply a change in your RBAC, please
+check the diff or the full rendered file.</p>
+<p>Diff view (same for deployment and daemonset):
+<div class="highlight"><pre><span></span><code><span class="gh">diff --git docs/kubernetes/deploy/deployment/rbac.yaml docs/kubernetes/deploy/deployment/rbac.yaml</span>
+<span class="gh">index 361f3789..c0e448a4 100644</span>
+<span class="gd">--- docs/kubernetes/deploy/deployment/rbac.yaml</span>
+<span class="gi">+++ docs/kubernetes/deploy/deployment/rbac.yaml</span>
+<span class="gu">@@ -37,11 +37,18 @@ metadata:</span>
+   name: skipper-ingress
+   namespace: kube-system
+ ---
+<span class="gd">-apiVersion: rbac.authorization.k8s.io/v1beta1</span>
+<span class="gi">+apiVersion: rbac.authorization.k8s.io/v1</span>
+ kind: ClusterRole
+ metadata:
+   name: skipper-ingress
+ rules:
+<span class="gi">+- apiGroups:</span>
+<span class="gi">+  - networking.k8s.io</span>
+<span class="gi">+  resources:</span>
+<span class="gi">+  - ingresses</span>
+<span class="gi">+  verbs:</span>
+<span class="gi">+  - get</span>
+<span class="gi">+  - list</span>
+ - apiGroups:
+     - extensions
+   resources:
+<span class="gu">@@ -66,7 +73,7 @@ rules:</span>
+   - get
+   - list
+ ---
+<span class="gd">-apiVersion: rbac.authorization.k8s.io/v1beta1</span>
+<span class="gi">+apiVersion: rbac.authorization.k8s.io/v1</span>
+ kind: ClusterRoleBinding
+ metadata:
+   name: skipper-ingress
+<span class="gu">@@ -79,7 +86,7 @@ subjects:</span>
+   name: skipper-ingress
+   namespace: kube-system
+ ---
+<span class="gd">-apiVersion: rbac.authorization.k8s.io/v1beta1</span>
+<span class="gi">+apiVersion: rbac.authorization.k8s.io/v1</span>
+ kind: RoleBinding
+ metadata:
+   name: skipper-ingress-hostnetwork-psp
+</code></pre></div></p>
+<p>Full rendered RBAC files (same for deployment and daemonset):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># cat docs/kubernetes/deploy/deployment/rbac.yaml</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">policy/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PodSecurityPolicy</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hostnetwork</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">hostNetwork</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">hostPorts</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">max</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10000</span>
+    <span class="nt">min</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
+  <span class="nt">supplementalGroups</span><span class="p">:</span>
+    <span class="nt">rule</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RunAsAny</span>
+  <span class="nt">fsGroup</span><span class="p">:</span>
+    <span class="nt">rule</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RunAsAny</span>
+  <span class="nt">runAsUser</span><span class="p">:</span>
+    <span class="c1"># Require the container to run without root privileges.</span>
+    <span class="nt">rule</span><span class="p">:</span> <span class="s">&#39;MustRunAsNonRoot&#39;</span>
+  <span class="nt">seLinux</span><span class="p">:</span>
+    <span class="nt">rule</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RunAsAny</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hostnetwork-psp</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions</span>
+  <span class="nt">resourceNames</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hostnetwork</span>
+  <span class="nt">resources</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">podsecuritypolicies</span>
+  <span class="nt">verbs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">use</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io</span>
+  <span class="nt">resources</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingresses</span>
+  <span class="nt">verbs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+<span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions</span>
+  <span class="nt">resources</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ingresses</span>
+  <span class="nt">verbs</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+<span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;&quot;</span><span class="p p-Indicator">]</span>
+  <span class="nt">resources</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">namespaces</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">services</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">endpoints</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pods</span>
+  <span class="nt">verbs</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+<span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org</span>
+  <span class="nt">resources</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">routegroups</span>
+  <span class="nt">verbs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
+<span class="nt">roleRef</span><span class="p">:</span>
+  <span class="nt">apiGroup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
+  <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
+<span class="nt">subjects</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RoleBinding</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress-hostnetwork-psp</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
+<span class="nt">roleRef</span><span class="p">:</span>
+  <span class="nt">apiGroup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
+  <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hostnetwork-psp</span>
+<span class="nt">subjects</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skipper-ingress</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kube-system</span>
 </code></pre></div>
                 
               

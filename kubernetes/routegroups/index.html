@@ -1324,14 +1324,16 @@ command:</p>
         <span class="p p-Indicator">-</span> <span class="nt">backendName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-backend</span>
 </code></pre></div>
 <p>This is equivalent to the ingress:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-ingress</span>
 <span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">backend</span><span class="p">:</span>
-    <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-    <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+  <span class="nt">defaultBackend</span><span class="p">:</span>
+    <span class="nt">service</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+      <span class="nt">port</span><span class="p">:</span>
+        <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <p>Notice that the route group contains a list of actual backends, and the defined service backend is then
 referenced as the default backend. This structure plays a role in supporting scenarios like A/B testing and
@@ -1484,14 +1486,16 @@ the RouteGroup format, as well. In the following, we describe the mapping from I
 fields.</p>
 <h3 id="ingress-with-default-backend">Ingress with default backend<a class="headerlink" href="#ingress-with-default-backend" title="Permanent link">&para;</a></h3>
 <p>Ingress:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-ingress</span>
 <span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">backend</span><span class="p">:</span>
-    <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-    <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+  <span class="nt">defaultBackend</span><span class="p">:</span>
+    <span class="nt">service</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+      <span class="nt">port</span><span class="p">:</span>
+        <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <p>RouteGroup:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>
@@ -1509,7 +1513,7 @@ fields.</p>
 </code></pre></div>
 <h3 id="ingress-with-path-rule">Ingress with path rule<a class="headerlink" href="#ingress-with-path-rule" title="Permanent link">&para;</a></h3>
 <p>Ingress:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-ingress</span>
@@ -1519,9 +1523,12 @@ fields.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/api</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <p>RouteGroup:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>
@@ -1541,7 +1548,7 @@ fields.</p>
 </code></pre></div>
 <h3 id="ingress-with-multiple-hosts">Ingress with multiple hosts<a class="headerlink" href="#ingress-with-multiple-hosts" title="Permanent link">&para;</a></h3>
 <p>Ingress (we need to define two rules):</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-ingress</span>
@@ -1551,16 +1558,22 @@ fields.</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/api</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
   <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">legacy-name.example.org</span>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/api</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <p>RouteGroup (we just define an additional host):</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>
@@ -1582,7 +1595,7 @@ fields.</p>
 <h3 id="ingress-with-multiple-hosts-and-different-routing">Ingress with multiple hosts, and different routing<a class="headerlink" href="#ingress-with-multiple-hosts-and-different-routing" title="Permanent link">&para;</a></h3>
 <p>For those cases when using multiple hostnames in the same ingress with different rules, we need to apply a
 small workaround for the equivalent route group spec. Ingress:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-ingress</span>
@@ -1592,16 +1605,22 @@ small workaround for the equivalent route group spec. Ingress:</p>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/api</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
   <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">legacy-name.example.org</span>
     <span class="nt">http</span><span class="p">:</span>
       <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/application</span>
+        <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Prefix</span>
         <span class="nt">backend</span><span class="p">:</span>
-          <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-          <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+          <span class="nt">service</span><span class="p">:</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+            <span class="nt">port</span><span class="p">:</span>
+              <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <p>RouteGroup (we need to use additional host predicates):</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>
@@ -1641,7 +1660,7 @@ for different routes.</p>
 <h3 id="zalandoorgskipper-routes">zalando.org/skipper-routes<a class="headerlink" href="#zalandoorgskipper-routes" title="Permanent link">&para;</a></h3>
 <p>&ldquo;Custom routes&rdquo; in a route group are unnecessary, because every route can be configured with predicates, filters
 and backends without limitations. E.g where an ingress annotation&rsquo;s metadata may look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">extensions/v1beta1</span>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-ingress</span>
@@ -1649,8 +1668,10 @@ and backends without limitations. E.g where an ingress annotation&rsquo;s metada
     <span class="no">Method(&quot;OPTIONS&quot;) -&gt; status(200) -&gt; &lt;shunt&gt;</span>
 <span class="nt">spec</span><span class="p">:</span>
   <span class="nt">backend</span><span class="p">:</span>
-    <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
-    <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">service</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-service</span>
+      <span class="nt">port</span><span class="p">:</span>
+        <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
 <p>the equivalent RouteGroup would look like this:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>
@@ -1730,7 +1751,25 @@ explained for the internals. The mapping is as follows:</p>
 <table>
 <thead>
 <tr>
-<th>Ingress:</th>
+<th>Ingress pathType:</th>
+<th>RouteGroup:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Exact</code> and <code>/foo</code></td>
+<td>path: <code>/foo</code></td>
+</tr>
+<tr>
+<td><code>Prefix</code> and <code>/foo</code></td>
+<td>pathSubtree: <code>/foo</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Ingress (<code>pathType: ImplementationSpecific</code>):</th>
 <th>RouteGroup:</th>
 </tr>
 </thead>
@@ -1760,7 +1799,7 @@ the flag <code>--kubernetes-routegroup-class=&lt;string&gt;</code> to only selec
 objects that have the annotation <code>zalando.org/routegroup.class</code> set to
 <code>&lt;string&gt;</code>. Skipper will only create routes for RouteGroup objects with
 it&rsquo;s annotation or RouteGroup objects that do not have this annotation. The
-default class is <code>skipper</code>, if not set. </p>
+default class is <code>skipper</code>, if not set.</p>
 <p>Example RouteGroup:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zalando.org/v1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">RouteGroup</span>
