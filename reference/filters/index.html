@@ -929,6 +929,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#clusterleakybucketratelimit" class="md-nav__link">
+    clusterLeakyBucketRatelimit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lua" class="md-nav__link">
     lua
   </a>
@@ -2350,6 +2357,13 @@
         <li class="md-nav__item">
   <a href="#backendratelimit" class="md-nav__link">
     backendRatelimit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clusterleakybucketratelimit" class="md-nav__link">
+    clusterLeakyBucketRatelimit
   </a>
   
 </li>
@@ -3975,6 +3989,87 @@ The total request rate each backend receives can not exceed <code>40+80=120</cod
 </code></pre></div>
 Configures rate limit of 100 requests per second for each <code>backend1</code> and <code>backend2</code> and responds
 with <code>429 Too Many Requests</code> when limit is reached.</p>
+<h2 id="clusterleakybucketratelimit">clusterLeakyBucketRatelimit<a class="headerlink" href="#clusterleakybucketratelimit" title="Permanent link">&para;</a></h2>
+<p>Implements leaky bucket rate limit algorithm that uses Redis as a storage.
+Requires command line flags <code>-enable-ratelimits</code>, <code>-enable-swarm</code> and <code>-swarm-redis-urls</code> to be set.</p>
+<p>The leaky bucket is an algorithm based on an analogy of how a bucket with a constant leak will overflow if either
+the average rate at which water is poured in exceeds the rate at which the bucket leaks or if more water than
+the capacity of the bucket is poured in all at once, see <a href="https://en.wikipedia.org/wiki/Leaky_bucket">https://en.wikipedia.org/wiki/Leaky_bucket</a></p>
+<p>Parameters:</p>
+<ul>
+<li>label (string)</li>
+<li>leak rate volume (int)</li>
+<li>leak rate period (time.Duration)</li>
+<li>capacity (int)</li>
+<li>increment (int)</li>
+</ul>
+<p>The bucket label, leak rate (volume/period) and capacity uniquely identify the bucket.</p>
+<p>Label supports <a href="#template-placeholders">template placeholders</a>.
+If a template placeholder can&rsquo;t be resolved then request is allowed and does not add to any bucket.</p>
+<p>Leak rate (divided by increment) defines a maximum average allowed request rate.
+The rate is configured by two parameters for convenience and consistency with other filters but is actually a single number,
+e.g. the rate of 2 per second equals to the rate of 20 per 10 seconds or 120 per minute.</p>
+<p>Capacity defines the maximum request burst size or an allowed jitter.</p>
+<p>Each passing request adds increment amount to the bucket, different routes may add different amounts to the same bucket.</p>
+<p>Configuration with equal capacity and increment allows no jitter: first request fills up the bucket full and
+subsequent request will be rejected if it arrives earlier than <code>emission interval = 1/leak rate</code>.</p>
+<p>Real requests always have a jitter which can be demonstrated by the configuration having capacity and increment of one:
+<div class="highlight"><pre><span></span><code>r1: * -&gt; clusterLeakyBucketRatelimit(&quot;1rps&quot;, 1, &quot;1s&quot;, 1, 1) -&gt; status(200) -&gt; &lt;shunt&gt;;
+</code></pre></div>
+it does not allow jitter and therefore rejects ~half of the requests coming at rate of 1 rps:
+<div class="highlight"><pre><span></span><code>$ echo &quot;GET http://localhost:9090&quot; | vegeta attack -rate=1/s -duration=1m | vegeta report
+Requests      [total, rate, throughput]  60, 1.02, 0.58
+Duration      [total, attack, wait]      59.001991855s, 59.000310522s, 1.681333ms
+Latencies     [mean, 50, 95, 99, max]    1.721207ms, 1.555227ms, 1.943115ms, 10.689486ms, 11.538278ms
+Bytes In      [total, mean]              0, 0.00
+Bytes Out     [total, mean]              0, 0.00
+Success       [ratio]                    56.67%
+Status Codes  [code:count]               200:34  429:26
+Error Set:
+429 Too Many Requests
+</code></pre></div></p>
+<p>On the other hand the configuration with capacity greater than increment:
+<div class="highlight"><pre><span></span><code>r1: * -&gt; clusterLeakyBucketRatelimit(&quot;1rps2&quot;, 1, &quot;1s&quot;, 2, 1) -&gt; status(200) -&gt; &lt;shunt&gt;;
+</code></pre></div>
+allows all requests:
+<div class="highlight"><pre><span></span><code>~$ echo &quot;GET http://localhost:9090&quot; | vegeta attack -rate=1/s -duration=1m | vegeta report
+Requests      [total, rate, throughput]  60, 1.02, 1.02
+Duration      [total, attack, wait]      59.00023518s, 58.999779118s, 456.062µs
+Latencies     [mean, 50, 95, 99, max]    1.410641ms, 1.585908ms, 1.859727ms, 8.285963ms, 8.997149ms
+Bytes In      [total, mean]              0, 0.00
+Bytes Out     [total, mean]              0, 0.00
+Success       [ratio]                    100.00%
+Status Codes  [code:count]               200:60
+Error Set:
+</code></pre></div>
+and even if rate is greater than 1 rps the average allowed request rate is still equal to the leak rate of 1 rps:
+<div class="highlight"><pre><span></span><code>$ echo &quot;GET http://localhost:9090&quot; | vegeta attack -rate=11/10s -duration=1m | vegeta report
+Requests      [total, rate, throughput]  66, 1.12, 1.03
+Duration      [total, attack, wait]      59.091880389s, 59.089985762s, 1.894627ms
+Latencies     [mean, 50, 95, 99, max]    1.709568ms, 1.60613ms, 1.925731ms, 10.601822ms, 12.10052ms
+Bytes In      [total, mean]              0, 0.00
+Bytes Out     [total, mean]              0, 0.00
+Success       [ratio]                    92.42%
+Status Codes  [code:count]               200:61  429:5
+Error Set:
+429 Too Many Requests
+</code></pre></div></p>
+<p>Therefore the capacity should be configured greater than increment unless strict request interval needs to be enforced.
+Configuration having capacity below increment rejects all requests.</p>
+<p>Examples:
+<div class="highlight"><pre><span></span><code>// allow each unique Authorization header once in five seconds
+clusterLeakyBucketRatelimit(&quot;auth-${request.header.Authorization}&quot;, 1, &quot;5s&quot;, 2, 1)
+
+// allow 60 requests per hour (each subsequent request allowed not earlied than after 1h/60 = 1m) for all clients
+clusterLeakyBucketRatelimit(&quot;hourly&quot;, 60, &quot;1h&quot;, 1, 1)
+
+// allow 10 requests per minute for each unique PHPSESSID cookie with bursts of up to 5 requests
+clusterLeakyBucketRatelimit(&quot;session-${request.cookie.PHPSESSID}&quot;, 10, &quot;1m&quot;, 5, 1)
+
+// use the same bucket but add different amount (i.e. one /expensive request counts as two /cheap)
+Path(&quot;/cheap&quot;)     -&gt; clusterLeakyBucketRatelimit(&quot;user-${request.cookie.Authorization}&quot;, 1, &quot;1s&quot;, 5, 1) -&gt; ...
+Path(&quot;/expensive&quot;) -&gt; clusterLeakyBucketRatelimit(&quot;user-${request.cookie.Authorization}&quot;, 1, &quot;1s&quot;, 5, 2) -&gt; ...
+</code></pre></div></p>
 <h2 id="lua">lua<a class="headerlink" href="#lua" title="Permanent link">&para;</a></h2>
 <p>See <a href="../scripts/">the scripts page</a></p>
 <h2 id="corsorigin">corsOrigin<a class="headerlink" href="#corsorigin" title="Permanent link">&para;</a></h2>
