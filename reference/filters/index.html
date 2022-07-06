@@ -936,6 +936,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#shedder" class="md-nav__link">
+    shedder
+  </a>
+  
+    <nav class="md-nav" aria-label="shedder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admissioncontrol" class="md-nav__link">
+    admissionControl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lua" class="md-nav__link">
     lua
   </a>
@@ -2369,6 +2389,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#shedder" class="md-nav__link">
+    shedder
+  </a>
+  
+    <nav class="md-nav" aria-label="shedder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admissioncontrol" class="md-nav__link">
+    admissionControl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lua" class="md-nav__link">
     lua
   </a>
@@ -2911,8 +2951,8 @@ no-compression, 1 means best-speed and 11 means best-compression. Example:</p>
 <div class="highlight"><pre><span></span><code>* -&gt; compress(11, &quot;image/tiff&quot;) -&gt; &quot;https://www.example.org&quot;
 </code></pre></div>
 <p>The filter also checks the incoming request, if it accepts the supported encodings,
-explicitly stated in the Accept-Encoding header. 
-The filter currently supports by default <code>gzip</code>, <code>deflate</code> and <code>br</code> (can be overridden with flag <code>compress-encodings</code>). 
+explicitly stated in the Accept-Encoding header.
+The filter currently supports by default <code>gzip</code>, <code>deflate</code> and <code>br</code> (can be overridden with flag <code>compress-encodings</code>).
 It does not assume that the client accepts any encoding if the
 Accept-Encoding header is not set. It ignores * in the Accept-Encoding header.</p>
 <p>Supported encodings are prioritized on:
@@ -4070,6 +4110,65 @@ clusterLeakyBucketRatelimit(&quot;session-${request.cookie.PHPSESSID}&quot;, 10,
 Path(&quot;/cheap&quot;)     -&gt; clusterLeakyBucketRatelimit(&quot;user-${request.cookie.Authorization}&quot;, 1, &quot;1s&quot;, 5, 1) -&gt; ...
 Path(&quot;/expensive&quot;) -&gt; clusterLeakyBucketRatelimit(&quot;user-${request.cookie.Authorization}&quot;, 1, &quot;1s&quot;, 5, 2) -&gt; ...
 </code></pre></div></p>
+<h2 id="shedder">shedder<a class="headerlink" href="#shedder" title="Permanent link">&para;</a></h2>
+<p>The basic idea of load shedding is to reduce errors by early stopping
+some of the ingress requests that create too much load and serving
+the maximum throughput the system can process at a point in time.</p>
+<p>There is a great talk by <a href="https://www.youtube.com/watch?v=XNEIkivvaV4">Acacio Cruz from
+Google</a>
+that explains the basic principles.</p>
+<h3 id="admissioncontrol">admissionControl<a class="headerlink" href="#admissioncontrol" title="Permanent link">&para;</a></h3>
+<p>Implements an admission control filter, that rejects traffic by
+observed error rate and probability.</p>
+<p>The probability of rejection is calculated by the following equation:</p>
+<p>$$ P_{reject} = ( { n_{total} - { n_{success} \over threshold } \over n_{total} + 1} )^{ exponent } $$</p>
+<p>Examples:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">admissionControl(metricSuffix, mode, d, windowSize, minRPS, successThreshold, maxRejectProbability, exponent)</span>
+<span class="err">admissionControl(&quot;myapp&quot;, &quot;active&quot;, &quot;1s&quot;, 5, 10, 0.95, 0.9, 0.5)</span>
+</code></pre></div>
+
+<p>Parameters:</p>
+<ul>
+<li>metric suffix (string)</li>
+<li>mode (enum)</li>
+<li>d (time.Duration)</li>
+<li>window size (int)</li>
+<li>minRps (int)</li>
+<li>success threshold (float64)</li>
+<li>max reject probability (float64)</li>
+<li>exponent (float64)</li>
+</ul>
+<p>Metric suffix is the chosen suffix key to expose reject counter,
+should be unique by filter instance</p>
+<p>Mode has 3 different possible values:</p>
+<ul>
+<li>&ldquo;active&rdquo; will reject traffic</li>
+<li>&ldquo;inactive&rdquo; will never reject traffic</li>
+<li>&ldquo;logInactive&rdquo; will not reject traffic, but log to debug filter settings</li>
+</ul>
+<p>D the time duration of a single slot for required counters in our
+circular buffer of window size.</p>
+<p>Window size is the size of the circular buffer. It is used to snapshot
+counters to calculate total requests and number of success. It is
+within $[1, 100]$.</p>
+<p>MinRps is the minimum requests per second that have to pass this filter
+otherwise it will not reject traffic.</p>
+<p>Success threshold sets the lowest request success rate at which the
+filter will not reject requests. It is within $(0,1]$. A value of
+0.95 means an error rate of lower than 5% will not trigger
+rejects.</p>
+<p>Max reject probability sets the upper bound of reject probability. It
+is within (0,1]. A value of 0.95 means if backend errors with 100% it
+will only reject up to 95%.</p>
+<p>exponent is used to dictate the rejection probability. The
+calculation is done by $p = p^{exponent}$
+The exponent value is within $(0,\infty]$, to increase rejection
+probability you have to use values lower than 1:</p>
+<ul>
+<li>1: linear</li>
+<li>1/2: quadratic</li>
+<li>1/3: cubic</li>
+</ul>
 <h2 id="lua">lua<a class="headerlink" href="#lua" title="Permanent link">&para;</a></h2>
 <p>See <a href="../scripts/">the scripts page</a></p>
 <h2 id="corsorigin">corsOrigin<a class="headerlink" href="#corsorigin" title="Permanent link">&para;</a></h2>
@@ -4697,14 +4796,14 @@ the fade-in curve, based on the following equation:</p>
 fadeIn(&quot;3m&quot;, 1.5)
 </code></pre></div>
 <h4 id="warning-on-fadein-and-rolling-restarts">Warning on fadeIn and Rolling Restarts<a class="headerlink" href="#warning-on-fadein-and-rolling-restarts" title="Permanent link">&para;</a></h4>
-<p>Traffic fade-in has the potential to skew the traffic to your backend pods in case of a rolling restart 
+<p>Traffic fade-in has the potential to skew the traffic to your backend pods in case of a rolling restart
 (<code>kubectl rollout restart</code>), because it is very likely that the rolling restart is going faster than the
 fade-in duration. The image below shows an example of a rolling restart for a four-pod deployment (A, B, C, D)
 into (E, F, G, H), and the traffic share of each pod over time. While the ramp-up of the new pods is ongoing,
 the remaining old pods will receive a largely increased traffic share (especially the last one, D in this
 example), as well as an over-propotional traffic share for the first pod in the rollout (E).</p>
 <p>To make rolling restarts safe, you need to slow them down by setting <code>spec.minReadySeconds</code> on the pod spec
-of your deployment or stackset, according to your fadeIn duration. </p>
+of your deployment or stackset, according to your fadeIn duration.</p>
 <p><img alt="Rolling Restart and Fade-In" src="../../img/fadein_traffic_skew.png" /></p>
 <h2 id="endpointcreated">endpointCreated<a class="headerlink" href="#endpointcreated" title="Permanent link">&para;</a></h2>
 <p>This filter marks the creation time of a load balanced endpoint. When used together with the fadeIn
