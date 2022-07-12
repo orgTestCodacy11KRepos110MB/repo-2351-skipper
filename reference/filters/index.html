@@ -4121,7 +4121,7 @@ that explains the basic principles.</p>
 <p>Implements an admission control filter, that rejects traffic by
 observed error rate and probability.</p>
 <p>The probability of rejection is calculated by the following equation:</p>
-<p>$$ P_{reject} = ( { n_{total} - { n_{success} \over threshold } \over n_{total} + 1} )^{ exponent } $$</p>
+<div class="arithmatex">\[ P_{reject} = ( { n_{total} - { n_{success} \over threshold } \over n_{total} + 1} )^{ exponent } \]</div>
 <p>Examples:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">admissionControl(metricSuffix, mode, d, windowSize, minRPS, successThreshold, maxRejectProbability, exponent)</span>
 <span class="err">admissionControl(&quot;myapp&quot;, &quot;active&quot;, &quot;1s&quot;, 5, 10, 0.95, 0.9, 0.5)</span>
@@ -4150,19 +4150,19 @@ should be unique by filter instance</p>
 circular buffer of window size.</p>
 <p>Window size is the size of the circular buffer. It is used to snapshot
 counters to calculate total requests and number of success. It is
-within $[1, 100]$.</p>
+within <span class="arithmatex">\([1, 100]\)</span>.</p>
 <p>MinRps is the minimum requests per second that have to pass this filter
 otherwise it will not reject traffic.</p>
 <p>Success threshold sets the lowest request success rate at which the
-filter will not reject requests. It is within $(0,1]$. A value of
+filter will not reject requests. It is within <span class="arithmatex">\((0,1]\)</span>. A value of
 0.95 means an error rate of lower than 5% will not trigger
 rejects.</p>
 <p>Max reject probability sets the upper bound of reject probability. It
 is within (0,1]. A value of 0.95 means if backend errors with 100% it
 will only reject up to 95%.</p>
 <p>exponent is used to dictate the rejection probability. The
-calculation is done by $p = p^{exponent}$
-The exponent value is within $(0,\infty]$, to increase rejection
+calculation is done by <span class="arithmatex">\(p = p^{exponent}\)</span>
+The exponent value is within <span class="arithmatex">\((0,\infty]\)</span>, to increase rejection
 probability you have to use values lower than 1:</p>
 <ul>
 <li>1: linear</li>
