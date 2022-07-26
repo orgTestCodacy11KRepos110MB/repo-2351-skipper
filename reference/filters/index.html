@@ -3990,9 +3990,11 @@ responds with <code>503 Service Unavailable</code> status to the client, i.e. im
 <p>It is similar to <a href="#clusterclientratelimit">clusterClientRatelimit</a> filter but counts request rate
 using backend endpoint address instead of incoming request IP address or a HTTP header.
 Requires command line flags <code>-enable-swarm</code> and <code>-enable-ratelimits</code>.</p>
-<p>Both <em>rate limiting</em> and <em>load shedding</em> can use the exact same mechanism to protect the backend but the key difference is the semantics:
-* <em>rate limiting</em> should adopt 4XX and inform the client that they are exceeding some quota. It doesn&rsquo;t depend on the current capacity of the backend.
-* <em>load shedding</em> should adopt 5XX and inform the client that the backend is not able to provide the service. It depends on the current capacity of the backend.</p>
+<p>Both <em>rate limiting</em> and <em>load shedding</em> can use the exact same mechanism to protect the backend but the key difference is the semantics:</p>
+<ul>
+<li><em>rate limiting</em> should adopt 4XX and inform the client that they are exceeding some quota. It doesn&rsquo;t depend on the current capacity of the backend.</li>
+<li><em>load shedding</em> should adopt 5XX and inform the client that the backend is not able to provide the service. It depends on the current capacity of the backend.</li>
+</ul>
 <p>Parameters:</p>
 <ul>
 <li>rate limit group (string)</li>
