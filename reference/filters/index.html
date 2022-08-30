@@ -286,6 +286,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#blockcontent" class="md-nav__link">
+    blockContent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#modrequestheader" class="md-nav__link">
     modRequestHeader
   </a>
@@ -1739,6 +1746,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#blockcontent" class="md-nav__link">
+    blockContent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#modrequestheader" class="md-nav__link">
     modRequestHeader
   </a>
@@ -2752,6 +2766,16 @@ foo3:
   -&gt; backendIsProxy()
   -&gt; &lt;dynamic&gt;;
 </code></pre></div>
+<h2 id="blockcontent">blockContent<a class="headerlink" href="#blockcontent" title="Permanent link">&para;</a></h2>
+<p>Block a request based on it&rsquo;s body content.</p>
+<p>The filter max buffer size is 2MiB by default and can be overidden with <code>-max-matcher-buffer-size=&lt;int&gt;</code>.</p>
+<p>Parameters:</p>
+<ul>
+<li>toblockList (List of strings)</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>* -&gt; blockContent(&quot;Malicious Content&quot;) -&gt; &quot;http://example.com&quot;;
+</code></pre></div>
 <h2 id="modrequestheader">modRequestHeader<a class="headerlink" href="#modrequestheader" title="Permanent link">&para;</a></h2>
 <p>Replace all matched regex expressions in the given header.</p>
 <p>Parameters:</p>
@@ -2776,7 +2800,7 @@ If a template placeholder can&rsquo;t be resolved then filter does not set the h
 <div class="highlight"><pre><span></span><code>foo: * -&gt; setRequestHeader(&quot;X-Passed-Skipper&quot;, &quot;true&quot;) -&gt; &quot;https://backend.example.org&quot;;
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>// Ratelimit per resource
-Path(&quot;/resource/:id&quot;) -&gt; setRequestHeader(&quot;X-Resource-Id&quot;, &quot;${id}&quot;) -&gt; clusterClientRateLimit(&quot;resource&quot;, 10, &quot;1m&quot;, &quot;X-Resource-Id&quot;) -&gt; &quot;https://backend.example.org&quot;;
+Path(&quot;/resource/:id&quot;) -&gt; setRequestHeader(&quot;X-Resource-Id&quot;, &quot;${id}&quot;) -&gt; clusterClientRatelimit(&quot;resource&quot;, 10, &quot;1m&quot;, &quot;X-Resource-Id&quot;) -&gt; &quot;https://backend.example.org&quot;;
 </code></pre></div>
 <h2 id="appendrequestheader">appendRequestHeader<a class="headerlink" href="#appendrequestheader" title="Permanent link">&para;</a></h2>
 <p>Same as <a href="#setrequestheader">setRequestHeader</a>,

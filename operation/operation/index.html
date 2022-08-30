@@ -2385,6 +2385,14 @@ to change to
 clone_r: ClientIP(&quot;9.0.0.0/8&quot;,&quot;2001:67c:20a0::/48&quot;) -&gt; ...`
 </code></pre></div>
 for migration time.</p>
+<p><code>/</code> symbol is not the only option for the separator for <code>-edit-route</code> and <code>-clone-route</code>, any
+first symbol you will specify in those options could be used as separator. This could be useful
+for IP mask changes, for example, you can use <code>-edit-route='#/26#/24#</code>. In this case
+<div class="highlight"><pre><span></span><code>r: SourceFromLast(&quot;9.0.0.0/26&quot;,&quot;2001:67c:20a0::/48&quot;) -&gt; ...`
+</code></pre></div>
+will be changed to
+<div class="highlight"><pre><span></span><code>r: SourceFromLast(&quot;9.0.0.0/24&quot;,&quot;2001:67c:20a0::/48&quot;) -&gt; ...`
+</code></pre></div></p>
                 
               
               
