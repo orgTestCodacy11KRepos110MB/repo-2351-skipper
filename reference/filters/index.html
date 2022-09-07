@@ -1115,6 +1115,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#fifo" class="md-nav__link">
+    fifo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lifo" class="md-nav__link">
     lifo
   </a>
@@ -2571,6 +2578,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fifo" class="md-nav__link">
+    fifo
+  </a>
   
 </li>
       
@@ -4654,6 +4668,23 @@ the filter assume that also non configured paths will be directed to this applic
 E.g.:</p>
 <div class="highlight"><pre><span></span><code>apiUsageMonitoring.custom.my-app.{unknown}.{unknown}.GET.{no-match}.*.*.http_count
 </code></pre></div>
+<h2 id="fifo">fifo<a class="headerlink" href="#fifo" title="Permanent link">&para;</a></h2>
+<p>This Filter is similar to the <a href="#lifo">lifo</a> filter in regards to
+parameters and status codes.</p>
+<p>It turned out that <code>lifo()</code> filter can hurt performance at high load.
+On AWS instance c6g.8xlarge <a href="#lifo">lifo</a> filter had a limit of 21000
+requests per second on a single instance. The <code>fifo()</code> filter had not
+hit a limit at 30000 requests per second.
+If you use TCP-LIFO, then request processing is already in LIFO style.</p>
+<p>Parameters:</p>
+<ul>
+<li>MaxConcurrency specifies how many goroutines are allowed to work on this queue (int)</li>
+<li>MaxQueueSize sets the queue size (int)</li>
+<li>Timeout sets the timeout to get request scheduled (time)</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>fifo(100, 150, &quot;10s&quot;)
+</code></pre></div>
 <h2 id="lifo">lifo<a class="headerlink" href="#lifo" title="Permanent link">&para;</a></h2>
 <p>This Filter changes skipper to handle the route with a bounded last in
 first out queue (LIFO), instead of an unbounded first in first out
@@ -4664,7 +4695,8 @@ idea of a LIFO queue is based on Dropbox bandaid proxy, which is not
 opensource. Dropbox shared their idea in a
 <a href="https://blogs.dropbox.com/tech/2018/03/meet-bandaid-the-dropbox-service-proxy/">public blogpost</a>.
 All bounded scheduler filters will respond requests with server status error
-codes in case of overrun. All scheduler filters return HTTP status code:</p>
+codes in case of overrun.</p>
+<p>All scheduler filters return HTTP status code:</p>
 <ul>
 <li>502, if the specified timeout is reached, because a request could not be scheduled fast enough</li>
 <li>503, if the queue is full</li>
