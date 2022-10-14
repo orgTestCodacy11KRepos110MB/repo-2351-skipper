@@ -8,10 +8,11 @@
       
       
       
+      
         <link rel="canonical" href="https://opensource.zalando.com/skipper/reference/filters/">
       
-      <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.5">
     
     
       
@@ -19,35 +20,30 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.75751829.min.css">
         
           
           
           <meta name="theme-color" content="#ffffff">
         
       
-      
-
     
     
     
       
-        
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
     
       
-
-    
     
     
   </head>
@@ -59,8 +55,8 @@
     
     
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="">
+      
   
-    
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -77,27 +73,26 @@
       
     </div>
     
-    
       
 
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Skipper" class="md-header__button md-logo" aria-label="Skipper" data-md-component="logo">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://opensource.zalando.com/skipper/" title="Skipper" class="md-header-nav__button md-logo" aria-label="Skipper">
       
   <img src="../../favicon.ico" alt="logo">
 
     </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             Skipper
           </span>
         </div>
-        <div class="md-header__topic" data-md-component="header-topic">
+        <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
               Filters
@@ -107,27 +102,22 @@
       </div>
     </div>
     
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
-      
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -143,11 +133,12 @@
 </div>
     
     
-      <div class="md-header__source">
-        <a href="https://github.com/zalando/skipper/" title="Go to repository" class="md-source" data-md-component="source">
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/zalando/skipper/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -156,14 +147,11 @@
       </div>
     
   </nav>
-  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -171,15 +159,17 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
 
 
+
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Skipper" class="md-nav__button md-logo" aria-label="Skipper" data-md-component="logo">
+    <a href="https://opensource.zalando.com/skipper/" title="Skipper" class="md-nav__button md-logo" aria-label="Skipper">
       
   <img src="../../favicon.ico" alt="logo">
 
@@ -188,10 +178,11 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/zalando/skipper/" title="Go to repository" class="md-source" data-md-component="source">
+      
+<a href="https://github.com/zalando/skipper/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -204,6 +195,7 @@
       
       
       
+
 
   
   
@@ -220,6 +212,7 @@
       
       
 
+
   
   
     
@@ -229,25 +222,21 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
       
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2">
-          Reference
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="nav-2">
+        Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
+        <label class="md-nav__title" for="nav-2">
           <span class="md-nav__icon md-icon"></span>
           Reference
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+          
             
-              
   
   
     
@@ -256,7 +245,6 @@
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
       
         
       
@@ -271,9 +259,7 @@
       </a>
       
         
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
   
   
     
@@ -283,7 +269,7 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#template-placeholders" class="md-nav__link">
@@ -915,51 +901,71 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    rate limits
+  </a>
+  
+    <nav class="md-nav" aria-label="rate limits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#localratelimit" class="md-nav__link">
     ~~localRatelimit~~
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clientratelimit" class="md-nav__link">
     clientRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#ratelimit" class="md-nav__link">
     ratelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clusterclientratelimit" class="md-nav__link">
     clusterClientRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clusterratelimit" class="md-nav__link">
     clusterRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#backendratelimit" class="md-nav__link">
     backendRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clusterleakybucketratelimit" class="md-nav__link">
     clusterLeakyBucketRatelimit
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ratelimitfailclosed" class="md-nav__link">
+    ratelimitFailClosed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1260,10 +1266,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1274,10 +1278,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1288,10 +1290,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1302,10 +1302,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1316,10 +1314,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1330,10 +1326,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1344,10 +1338,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1358,10 +1350,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1372,10 +1362,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1383,25 +1371,21 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_10" type="checkbox" id="__nav_2_10" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-10" type="checkbox" id="nav-2-10" >
       
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2_10">
-          Data Clients
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="nav-2-10">
+        Data Clients
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Data Clients" data-md-level="2">
-        <label class="md-nav__title" for="__nav_2_10">
+        <label class="md-nav__title" for="nav-2-10">
           <span class="md-nav__icon md-icon"></span>
           Data Clients
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+          
             
-              
   
   
   
@@ -1412,10 +1396,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1426,10 +1408,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1440,10 +1420,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1454,17 +1432,14 @@
     </li>
   
 
-            
           
         </ul>
       </nav>
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1472,25 +1447,21 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_11" type="checkbox" id="__nav_2_11" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-11" type="checkbox" id="nav-2-11" >
       
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2_11">
-          Operation
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="nav-2-11">
+        Operation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Operation" data-md-level="2">
-        <label class="md-nav__title" for="__nav_2_11">
+        <label class="md-nav__title" for="nav-2-11">
           <span class="md-nav__icon md-icon"></span>
           Operation
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+          
             
-              
   
   
   
@@ -1501,10 +1472,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1515,14 +1484,12 @@
     </li>
   
 
-            
           
         </ul>
       </nav>
     </li>
   
 
-            
           
         </ul>
       </nav>
@@ -1533,6 +1500,7 @@
       
       
       
+
 
   
   
@@ -1541,25 +1509,21 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
       
-      
-      
-      
-        <label class="md-nav__link" for="__nav_3">
-          Kubernetes
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="nav-3">
+        Kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
+        <label class="md-nav__title" for="nav-3">
           <span class="md-nav__icon md-icon"></span>
           Kubernetes
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+          
             
-              
   
   
   
@@ -1570,10 +1534,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1584,10 +1546,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1598,10 +1558,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1612,10 +1570,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1626,10 +1582,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1640,10 +1594,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1654,10 +1606,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1668,7 +1618,6 @@
     </li>
   
 
-            
           
         </ul>
       </nav>
@@ -1680,6 +1629,7 @@
       
       
 
+
   
   
   
@@ -1687,25 +1637,21 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
       
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4">
-          Tutorials
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="nav-4">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="nav-4">
           <span class="md-nav__icon md-icon"></span>
           Tutorials
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+          
             
-              
   
   
   
@@ -1716,10 +1662,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1730,10 +1674,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1744,10 +1686,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1758,10 +1698,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1772,10 +1710,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1786,10 +1722,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -1800,7 +1734,6 @@
     </li>
   
 
-            
           
         </ul>
       </nav>
@@ -1816,13 +1749,11 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
   
   
     
@@ -1832,7 +1763,7 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#template-placeholders" class="md-nav__link">
@@ -2464,51 +2395,71 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    rate limits
+  </a>
+  
+    <nav class="md-nav" aria-label="rate limits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#localratelimit" class="md-nav__link">
     ~~localRatelimit~~
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clientratelimit" class="md-nav__link">
     clientRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#ratelimit" class="md-nav__link">
     ratelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clusterclientratelimit" class="md-nav__link">
     clusterClientRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clusterratelimit" class="md-nav__link">
     clusterRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#backendratelimit" class="md-nav__link">
     backendRatelimit
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#clusterleakybucketratelimit" class="md-nav__link">
     clusterLeakyBucketRatelimit
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ratelimitfailclosed" class="md-nav__link">
+    ratelimitFailClosed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2810,19 +2761,16 @@
               </div>
             
           
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
                 
-                  
-
-  <a href="https://github.com/zalando/skipper/edit/master/docs/reference/filters.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
-
-
-<h1 id="skipper-filters">Skipper Filters<a class="headerlink" href="#skipper-filters" title="Permanent link">&para;</a></h1>
+                  <a href="https://github.com/zalando/skipper/edit/master/docs/reference/filters.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="skipper-filters">Skipper Filters<a class="headerlink" href="#skipper-filters" title="Permanent link">&para;</a></h1>
 <p>The parameters can be strings, regex or float64 / int</p>
 <ul>
 <li><code>string</code> is a string surrounded by double quotes (<code>"</code>)</li>
@@ -3965,15 +3913,15 @@ It accepts one or more arguments, thats is a path prefix which is granted access
 It supports exact matches of keys, key-value pairs, introspecting of arrays or exact and wildcard matching of nested structures.
 The query definition can be one or more queries per path, space delimited. The query syntax is <a href="https://github.com/tidwall/gjson/blob/master/SYNTAX.md">GJSON</a> with a convenience modifier of <code>@_</code> which unfolds to <code>[@this].#("+arg+")</code></p>
 <p>Given following example ID token:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;someone@example.org&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;CD-xyz&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;appX-Test-Users&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;Purchasing-Department&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="p">],</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Some One&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.org&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;CD-xyz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;appX-Test-Users&quot;</span>
+    <span class="s2">&quot;Purchasing-Department&quot;</span><span class="p">,</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Some One&quot;</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Access to path <code>/</code> would be granted to everyone in <code>example.org</code>, however path <code>/login</code> only to those being member of <code>group "appX-Tester"</code>:</p>
 <div class="highlight"><pre><span></span><code>oauthOidcAnyClaims(...) -&gt; oidcClaimsQuery(&quot;/login:groups.#[==\&quot;appX-Tester\&quot;]&quot;, &quot;/:@_:email%\&quot;*@example.org\&quot;&quot;)
@@ -4048,10 +3996,11 @@ backendHealthcheck: Path(&quot;/healthcheck&quot;)
 </code></pre></div>
 <p>See also the <a href="https://godoc.org/github.com/zalando/skipper/circuit">circuit breaker docs</a>.</p>
 <p>Can be used as <a href="../egress/">egress</a> feature.</p>
-<h2 id="localratelimit">~~localRatelimit~~<a class="headerlink" href="#localratelimit" title="Permanent link">&para;</a></h2>
+<h2 id="rate-limits">rate limits<a class="headerlink" href="#rate-limits" title="Permanent link">&para;</a></h2>
+<h3 id="localratelimit">~~localRatelimit~~<a class="headerlink" href="#localratelimit" title="Permanent link">&para;</a></h3>
 <p><strong>DEPRECATED</strong> use <a href="#clientratelimit">clientRatelimit</a> with the same
   settings instead.</p>
-<h2 id="clientratelimit">clientRatelimit<a class="headerlink" href="#clientratelimit" title="Permanent link">&para;</a></h2>
+<h3 id="clientratelimit">clientRatelimit<a class="headerlink" href="#clientratelimit" title="Permanent link">&para;</a></h3>
 <p>Per skipper instance calculated ratelimit, that allows number of
 requests by client. The definition of the same client is based on data
 of the http header and can be changed with an optional third
@@ -4081,7 +4030,7 @@ clientRatelimit(3, &quot;1m&quot;, &quot;Authorization&quot;)
 clientRatelimit(3, &quot;1m&quot;, &quot;X-Foo,Authorization,X-Bar&quot;)
 </code></pre></div>
 <p>See also the <a href="https://godoc.org/github.com/zalando/skipper/ratelimit">ratelimit docs</a>.</p>
-<h2 id="ratelimit">ratelimit<a class="headerlink" href="#ratelimit" title="Permanent link">&para;</a></h2>
+<h3 id="ratelimit">ratelimit<a class="headerlink" href="#ratelimit" title="Permanent link">&para;</a></h3>
 <p>Per skipper instance calculated ratelimit, that allows forwarding a
 number of requests to the backend group. You need to run skipper with
 command line flag <code>-enable-ratelimits</code>.</p>
@@ -4096,7 +4045,7 @@ ratelimit(300, &quot;1h&quot;)
 ratelimit(4000, &quot;1m&quot;, 503)
 </code></pre></div>
 <p>See also the <a href="https://godoc.org/github.com/zalando/skipper/ratelimit">ratelimit docs</a>.</p>
-<h2 id="clusterclientratelimit">clusterClientRatelimit<a class="headerlink" href="#clusterclientratelimit" title="Permanent link">&para;</a></h2>
+<h3 id="clusterclientratelimit">clusterClientRatelimit<a class="headerlink" href="#clusterclientratelimit" title="Permanent link">&para;</a></h3>
 <p>This ratelimit is calculated across all skipper peers and the same
 rate limit group. The first parameter is a string to select the same
 ratelimit group across one or more routes.  The rate limit group
@@ -4119,7 +4068,7 @@ clusterClientRatelimit(&quot;groupA&quot;, 10, &quot;1h&quot;, &quot;Authorizati
 clusterClientRatelimit(&quot;groupA&quot;, 10, &quot;1h&quot;, &quot;X-Forwarded-For,Authorization,User-Agent&quot;)
 </code></pre></div>
 <p>See also the <a href="https://godoc.org/github.com/zalando/skipper/ratelimit">ratelimit docs</a>.</p>
-<h2 id="clusterratelimit">clusterRatelimit<a class="headerlink" href="#clusterratelimit" title="Permanent link">&para;</a></h2>
+<h3 id="clusterratelimit">clusterRatelimit<a class="headerlink" href="#clusterratelimit" title="Permanent link">&para;</a></h3>
 <p>This ratelimit is calculated across all skipper peers and the same
 rate limit group. The first parameter is a string to select the same
 ratelimit group across one or more routes.  The rate limit group
@@ -4138,7 +4087,7 @@ clusterRatelimit(&quot;groupB&quot;, 300, &quot;1h&quot;)
 clusterRatelimit(&quot;groupB&quot;, 4000, &quot;1m&quot;, 503)
 </code></pre></div>
 <p>See also the <a href="https://godoc.org/github.com/zalando/skipper/ratelimit">ratelimit docs</a>.</p>
-<h2 id="backendratelimit">backendRatelimit<a class="headerlink" href="#backendratelimit" title="Permanent link">&para;</a></h2>
+<h3 id="backendratelimit">backendRatelimit<a class="headerlink" href="#backendratelimit" title="Permanent link">&para;</a></h3>
 <p>The filter configures request rate limit for each backend endpoint within rate limit group across all Skipper peers.
 When limit is reached Skipper refuses to forward the request to the backend and
 responds with <code>503 Service Unavailable</code> status to the client, i.e. implements <em>load shedding</em>.</p>
@@ -4186,7 +4135,7 @@ The total request rate each backend receives can not exceed <code>40+80=120</cod
 </code></pre></div>
 Configures rate limit of 100 requests per second for each <code>backend1</code> and <code>backend2</code> and responds
 with <code>429 Too Many Requests</code> when limit is reached.</p>
-<h2 id="clusterleakybucketratelimit">clusterLeakyBucketRatelimit<a class="headerlink" href="#clusterleakybucketratelimit" title="Permanent link">&para;</a></h2>
+<h3 id="clusterleakybucketratelimit">clusterLeakyBucketRatelimit<a class="headerlink" href="#clusterleakybucketratelimit" title="Permanent link">&para;</a></h3>
 <p>Implements leaky bucket rate limit algorithm that uses Redis as a storage.
 Requires command line flags <code>-enable-ratelimits</code>, <code>-enable-swarm</code> and <code>-swarm-redis-urls</code> to be set.</p>
 <p>The leaky bucket is an algorithm based on an analogy of how a bucket with a constant leak will overflow if either
@@ -4267,6 +4216,18 @@ clusterLeakyBucketRatelimit(&quot;session-${request.cookie.PHPSESSID}&quot;, 10,
 Path(&quot;/cheap&quot;)     -&gt; clusterLeakyBucketRatelimit(&quot;user-${request.cookie.Authorization}&quot;, 1, &quot;1s&quot;, 5, 1) -&gt; ...
 Path(&quot;/expensive&quot;) -&gt; clusterLeakyBucketRatelimit(&quot;user-${request.cookie.Authorization}&quot;, 1, &quot;1s&quot;, 5, 2) -&gt; ...
 </code></pre></div></p>
+<h3 id="ratelimitfailclosed">ratelimitFailClosed<a class="headerlink" href="#ratelimitfailclosed" title="Permanent link">&para;</a></h3>
+<p>This filter changes the failure mode for rate limit filters. If the
+filter is present, infrastructure issues will lead to rate limit.</p>
+<p>Examples:
+<div class="highlight"><pre><span></span><code>fail_open: * -&gt; clusterRatelimit(&quot;g&quot;,10, &quot;1s&quot;)
+fail_closed: * -&gt; ratelimitFailClosed() -&gt; clusterRatelimit(&quot;g&quot;, 10, &quot;1s&quot;)
+</code></pre></div></p>
+<p>In case <code>clusterRatelimit</code> could not reach the swarm (f.e. redis):</p>
+<ul>
+<li>Route <code>fail_open</code> will allow the request</li>
+<li>Route <code>fail_closed</code> will deny the request</li>
+</ul>
 <h2 id="shedder">shedder<a class="headerlink" href="#shedder" title="Permanent link">&para;</a></h2>
 <p>The basic idea of load shedding is to reduce errors by early stopping
 some of the ingress requests that create too much load and serving
@@ -4280,8 +4241,8 @@ observed error rate and probability.</p>
 <p>The probability of rejection is calculated by the following equation:</p>
 <div class="arithmatex">\[ P_{reject} = ( { n_{total} - { n_{success} \over threshold } \over n_{total} + 1} )^{ exponent } \]</div>
 <p>Examples:</p>
-<div class="codehilite"><pre><span></span><code>admissionControl(metricSuffix, mode, d, windowSize, minRPS, successThreshold, maxRejectProbability, exponent)
-admissionControl(&quot;myapp&quot;, &quot;active&quot;, &quot;1s&quot;, 5, 10, 0.95, 0.9, 0.5)
+<div class="codehilite"><pre><span></span><code><span class="err">admissionControl(metricSuffix, mode, d, windowSize, minRPS, successThreshold, maxRejectProbability, exponent)</span>
+<span class="err">admissionControl(&quot;myapp&quot;, &quot;active&quot;, &quot;1s&quot;, 5, 10, 0.95, 0.9, 0.5)</span>
 </code></pre></div>
 
 <p>Parameters:</p>
@@ -4696,50 +4657,50 @@ apiUsageMonitoring.custom.orders-backend.staging.orders-api.*.*.users.mmusterman
 <p>Endpoints can be monitored using the <code>apiUsageMonitoring</code> filter in the route. It accepts JSON objects (as strings)
 of the format mentioned below. In case any of the required parameters is missing, <code>no-op</code> filter is created, i.e. no
 metrics are captured, but the creation of the route does not fail.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">api-usage-monitoring-configuration</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span><span class="w"></span>
-<span class="w">  </span><span class="nt">required</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">application_id</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api_id</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path_templates</span><span class="w"></span>
-<span class="w">  </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">application_id</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ID of the application</span><span class="w"></span>
-<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">order-service</span><span class="w"></span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tag of the application</span><span class="w"></span>
-<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">staging</span><span class="w"></span>
-<span class="w">    </span><span class="nt">api_id</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ID of the API</span><span class="w"></span>
-<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orders-api</span><span class="w"></span>
-<span class="w">    </span><span class="nt">path_templates</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Endpoints to be monitored.</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span><span class="w"></span>
-<span class="w">      </span><span class="nt">minLength</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<span class="w">      </span><span class="nt">items</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w"></span>
-<span class="w">          </span><span class="no">Path template in /articles/{article-id} (OpenAPI 3) or in /articles/:article-id format.</span><span class="w"></span>
-<span class="w">          </span><span class="no">NOTE: They will be normalized to the :this format for metrics naming.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/orders/{order-id}</span><span class="w"></span>
-<span class="w">    </span><span class="nt">client_tracking_pattern</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w"></span>
-<span class="w">            </span><span class="no">The pattern that matches client id in form of a regular expression.</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nt">api-usage-monitoring-configuration</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+  <span class="nt">required</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application_id</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">api_id</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">path_templates</span>
+  <span class="nt">properties</span><span class="p">:</span>
+    <span class="nt">application_id</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ID of the application</span>
+      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">order-service</span>
+    <span class="nt">tag</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tag of the application</span>
+      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">staging</span>
+    <span class="nt">api_id</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ID of the API</span>
+      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">orders-api</span>
+    <span class="nt">path_templates</span><span class="p">:</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Endpoints to be monitored.</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+      <span class="nt">minLength</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+      <span class="nt">items</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">&gt;</span>
+          <span class="no">Path template in /articles/{article-id} (OpenAPI 3) or in /articles/:article-id format.</span>
+          <span class="no">NOTE: They will be normalized to the :this format for metrics naming.</span>
+        <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/orders/{order-id}</span>
+    <span class="nt">client_tracking_pattern</span><span class="p">:</span>
+        <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">&gt;</span>
+            <span class="no">The pattern that matches client id in form of a regular expression.</span>
 
-<span class="w">            </span><span class="no">By default (if undefined), it is set to `.*`.</span><span class="w"></span>
+            <span class="no">By default (if undefined), it is set to `.*`.</span>
 
-<span class="w">            </span><span class="no">An empty string disables the client metrics completely.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">        </span><span class="nt">examples</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">all_services</span><span class="p">:</span><span class="w"></span>
-<span class="w">                </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All services are tracked (for all activated realms).</span><span class="w"></span>
-<span class="w">                </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;.*&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="nt">just_some_services</span><span class="p">:</span><span class="w"></span>
-<span class="w">                </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Only services `orders-service` and `shipment-service` are tracked.</span><span class="w"></span>
-<span class="w">                </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;(orders</span><span class="err">\</span><span class="s">-service|shipment</span><span class="err">\</span><span class="s">-service)&quot;</span><span class="w"></span>
+            <span class="no">An empty string disables the client metrics completely.</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">examples</span><span class="p">:</span>
+            <span class="nt">all_services</span><span class="p">:</span>
+                <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">All services are tracked (for all activated realms).</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;.*&quot;</span>
+            <span class="nt">just_some_services</span><span class="p">:</span>
+                <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Only services `orders-service` and `shipment-service` are tracked.</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;(orders</span><span class="err">\</span><span class="s">-service|shipment</span><span class="err">\</span><span class="s">-service)&quot;</span>
 </code></pre></div>
 <p>Configuration Example:</p>
 <div class="highlight"><pre><span></span><code>apiUsageMonitoring(`
@@ -5026,83 +4987,84 @@ This is helpful in the case where certain keys are very popular and threaten to 
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>consistentHashBalanceFactor(3)
 </code></pre></div></p>
-
-
-
-
-
                 
-              </article>
-            </div>
-          
-          
+              
+              
+                
+
+
+              
+            </article>
+          </div>
         </div>
-        
       </main>
       
-        <footer class="md-footer">
+        
+<footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Introduction
+          <a href="../.." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
-          </div>
-        </a>
-      
-      
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Introduction
+              </div>
+            </div>
+          </a>
         
-        <a href="../predicates/" class="md-footer__link md-footer__link--next" aria-label="Next: Predicates" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Predicates
+        
+          <a href="../predicates/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Predicates
+              </div>
             </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
       
     </div>
   </div>
 </footer>
       
     </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
-    
-    
-      <script src="../../assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="../../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.8c7e0a7e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
       
         <script src="../../javascripts/mathjax.js"></script>
       
