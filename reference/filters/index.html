@@ -811,6 +811,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tokeninfo" class="md-nav__link">
+    tokeninfo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#oauthtokeninfoanyscope" class="md-nav__link">
     oauthTokeninfoAnyScope
   </a>
@@ -837,6 +844,14 @@
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenintrospection" class="md-nav__link">
+    tokenintrospection
+  </a>
+  
+    <nav class="md-nav" aria-label="tokenintrospection">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#oauthtokenintrospectionanyclaims" class="md-nav__link">
@@ -894,12 +909,38 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jwt" class="md-nav__link">
+    jwt
+  </a>
+  
+    <nav class="md-nav" aria-label="jwt">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#jwtvalidation" class="md-nav__link">
     jwtValidation
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forward" class="md-nav__link">
+    forward
+  </a>
+  
+    <nav class="md-nav" aria-label="forward">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#forwardtoken" class="md-nav__link">
@@ -912,6 +953,11 @@
   <a href="#forwardtokenfield" class="md-nav__link">
     forwardTokenField
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -943,17 +989,12 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#openid-connect" class="md-nav__link">
-    OpenID Connect
+    openid connect
   </a>
   
-    <nav class="md-nav" aria-label="OpenID Connect">
+    <nav class="md-nav" aria-label="openid connect">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -981,6 +1022,11 @@
   <a href="#oidcclaimsquery" class="md-nav__link">
     oidcClaimsQuery
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2539,6 +2585,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tokeninfo" class="md-nav__link">
+    tokeninfo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#oauthtokeninfoanyscope" class="md-nav__link">
     oauthTokeninfoAnyScope
   </a>
@@ -2565,6 +2618,14 @@
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenintrospection" class="md-nav__link">
+    tokenintrospection
+  </a>
+  
+    <nav class="md-nav" aria-label="tokenintrospection">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#oauthtokenintrospectionanyclaims" class="md-nav__link">
@@ -2622,12 +2683,38 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jwt" class="md-nav__link">
+    jwt
+  </a>
+  
+    <nav class="md-nav" aria-label="jwt">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#jwtvalidation" class="md-nav__link">
     jwtValidation
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forward" class="md-nav__link">
+    forward
+  </a>
+  
+    <nav class="md-nav" aria-label="forward">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#forwardtoken" class="md-nav__link">
@@ -2640,6 +2727,11 @@
   <a href="#forwardtokenfield" class="md-nav__link">
     forwardTokenField
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2671,17 +2763,12 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#openid-connect" class="md-nav__link">
-    OpenID Connect
+    openid connect
   </a>
   
-    <nav class="md-nav" aria-label="OpenID Connect">
+    <nav class="md-nav" aria-label="openid connect">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2709,6 +2796,11 @@
   <a href="#oidcclaimsquery" class="md-nav__link">
     oidcClaimsQuery
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3934,6 +4026,10 @@ webhook(&quot;https://custom-webhook.example.org/auth&quot;, &quot;X-Copy-Webhoo
 </code></pre></div>
 <p>The webhook timeout has a default of 2 seconds and can be globally
 changed, if skipper is started with <code>-webhook-timeout=2s</code> flag.</p>
+<h3 id="tokeninfo">tokeninfo<a class="headerlink" href="#tokeninfo" title="Permanent link">&para;</a></h3>
+<p>Tokeninfo handled by another service.
+The filters just validate the response from the tokeninfo
+service to do authorization as defined in the filter.</p>
 <h3 id="oauthtokeninfoanyscope">oauthTokeninfoAnyScope<a class="headerlink" href="#oauthtokeninfoanyscope" title="Permanent link">&para;</a></h3>
 <p>If skipper is started with <code>-oauth2-tokeninfo-url</code> flag, you can use
 this filter.</p>
@@ -3997,7 +4093,11 @@ token, it will allow the request to pass.</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>oauthTokeninfoAllKV(&quot;k1&quot;, &quot;v1&quot;, &quot;k2&quot;, &quot;v2&quot;)
 </code></pre></div>
-<h3 id="oauthtokenintrospectionanyclaims">oauthTokenintrospectionAnyClaims<a class="headerlink" href="#oauthtokenintrospectionanyclaims" title="Permanent link">&para;</a></h3>
+<h3 id="tokenintrospection">tokenintrospection<a class="headerlink" href="#tokenintrospection" title="Permanent link">&para;</a></h3>
+<p>Tokenintrospection handled by another service.
+The filters just validate the response from the tokenintrospection
+service to do authorization as defined in the filter.</p>
+<h4 id="oauthtokenintrospectionanyclaims">oauthTokenintrospectionAnyClaims<a class="headerlink" href="#oauthtokenintrospectionanyclaims" title="Permanent link">&para;</a></h4>
 <p>The filter accepts variable number of string arguments, which are used
 to validate the incoming token from the <code>Authorization: Bearer
 &lt;token&gt;</code> header. The first argument to the filter is the issuer URL,
@@ -4010,7 +4110,7 @@ token, it will allow the request to pass.</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>oauthTokenintrospectionAnyClaims(&quot;https://accounts.google.com&quot;, &quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;)
 </code></pre></div>
-<h3 id="oauthtokenintrospectionallclaims">oauthTokenintrospectionAllClaims<a class="headerlink" href="#oauthtokenintrospectionallclaims" title="Permanent link">&para;</a></h3>
+<h4 id="oauthtokenintrospectionallclaims">oauthTokenintrospectionAllClaims<a class="headerlink" href="#oauthtokenintrospectionallclaims" title="Permanent link">&para;</a></h4>
 <p>The filter accepts variable number of string arguments, which are used
 to validate the incoming token from the <code>Authorization: Bearer
 &lt;token&gt;</code> header. The first argument to the filter is the issuer URL,
@@ -4023,7 +4123,7 @@ token, it will allow the request to pass.</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>oauthTokenintrospectionAllClaims(&quot;https://accounts.google.com&quot;, &quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;)
 </code></pre></div>
-<h3 id="oauthtokenintrospectionanykv">oauthTokenintrospectionAnyKV<a class="headerlink" href="#oauthtokenintrospectionanykv" title="Permanent link">&para;</a></h3>
+<h4 id="oauthtokenintrospectionanykv">oauthTokenintrospectionAnyKV<a class="headerlink" href="#oauthtokenintrospectionanykv" title="Permanent link">&para;</a></h4>
 <p>The filter accepts an even number of variable arguments of type
 string, which are used to validate the incoming token from the
 <code>Authorization: Bearer &lt;token&gt;</code> header.  The first argument to the
@@ -4038,7 +4138,7 @@ it will allow the request to pass.</p>
 <div class="highlight"><pre><span></span><code>oauthTokenintrospectionAnyKV(&quot;https://accounts.google.com&quot;, &quot;k1&quot;, &quot;v1&quot;, &quot;k2&quot;, &quot;v2&quot;)
 oauthTokenintrospectionAnyKV(&quot;https://accounts.google.com&quot;, &quot;k1&quot;, &quot;v1&quot;, &quot;k1&quot;, &quot;v2&quot;)
 </code></pre></div>
-<h3 id="oauthtokenintrospectionallkv">oauthTokenintrospectionAllKV<a class="headerlink" href="#oauthtokenintrospectionallkv" title="Permanent link">&para;</a></h3>
+<h4 id="oauthtokenintrospectionallkv">oauthTokenintrospectionAllKV<a class="headerlink" href="#oauthtokenintrospectionallkv" title="Permanent link">&para;</a></h4>
 <p>The filter accepts an even number of variable arguments of type
 string, which are used to validate the incoming token from the
 <code>Authorization: Bearer &lt;token&gt;</code> header.  The first argument to the
@@ -4052,7 +4152,7 @@ it will allow the request to pass.</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>oauthTokenintrospectionAllKV(&quot;https://accounts.google.com&quot;, &quot;k1&quot;, &quot;v1&quot;, &quot;k2&quot;, &quot;v2&quot;)
 </code></pre></div>
-<h3 id="secureoauthtokenintrospectionanyclaims">secureOauthTokenintrospectionAnyClaims<a class="headerlink" href="#secureoauthtokenintrospectionanyclaims" title="Permanent link">&para;</a></h3>
+<h4 id="secureoauthtokenintrospectionanyclaims">secureOauthTokenintrospectionAnyClaims<a class="headerlink" href="#secureoauthtokenintrospectionanyclaims" title="Permanent link">&para;</a></h4>
 <p>The filter accepts variable number of string arguments, which are used
 to validate the incoming token from the <code>Authorization: Bearer
 &lt;token&gt;</code> header. The first argument to the filter is the issuer URL,
@@ -4071,7 +4171,7 @@ token, it will allow the request to pass.</p>
 <p>Read client-id and client-secret from environment variables
 <div class="highlight"><pre><span></span><code>secureOauthTokenintrospectionAnyClaims(&quot;issuerURL&quot;, &quot;&quot;, &quot;&quot;, &quot;claim1&quot;, &quot;claim2&quot;)
 </code></pre></div></p>
-<h3 id="secureoauthtokenintrospectionallclaims">secureOauthTokenintrospectionAllClaims<a class="headerlink" href="#secureoauthtokenintrospectionallclaims" title="Permanent link">&para;</a></h3>
+<h4 id="secureoauthtokenintrospectionallclaims">secureOauthTokenintrospectionAllClaims<a class="headerlink" href="#secureoauthtokenintrospectionallclaims" title="Permanent link">&para;</a></h4>
 <p>The filter accepts variable number of string arguments, which are used
 to validate the incoming token from the <code>Authorization: Bearer
 &lt;token&gt;</code> header. The first argument to the filter is the issuer URL,
@@ -4090,7 +4190,7 @@ token, it will allow the request to pass.</p>
 <p>Read client-id and client-secret from environment variables
 <div class="highlight"><pre><span></span><code>secureOauthTokenintrospectionAllClaims(&quot;issuerURL&quot;, &quot;&quot;, &quot;&quot;, &quot;claim1&quot;, &quot;claim2&quot;)
 </code></pre></div></p>
-<h3 id="secureoauthtokenintrospectionanykv">secureOauthTokenintrospectionAnyKV<a class="headerlink" href="#secureoauthtokenintrospectionanykv" title="Permanent link">&para;</a></h3>
+<h4 id="secureoauthtokenintrospectionanykv">secureOauthTokenintrospectionAnyKV<a class="headerlink" href="#secureoauthtokenintrospectionanykv" title="Permanent link">&para;</a></h4>
 <p>The filter accepts an even number of variable arguments of type
 string, which are used to validate the incoming token from the
 <code>Authorization: Bearer &lt;token&gt;</code> header.  The first argument to the
@@ -4110,7 +4210,7 @@ it will allow the request to pass.</p>
 <p>Read client-id and client-secret from environment variables
 <div class="highlight"><pre><span></span><code>secureOauthTokenintrospectionAnyKV(&quot;issuerURL&quot;, &quot;&quot;, &quot;&quot;, &quot;k1&quot;, &quot;v1&quot;, &quot;k2&quot;, &quot;v2&quot;)
 </code></pre></div></p>
-<h3 id="secureoauthtokenintrospectionallkv">secureOauthTokenintrospectionAllKV<a class="headerlink" href="#secureoauthtokenintrospectionallkv" title="Permanent link">&para;</a></h3>
+<h4 id="secureoauthtokenintrospectionallkv">secureOauthTokenintrospectionAllKV<a class="headerlink" href="#secureoauthtokenintrospectionallkv" title="Permanent link">&para;</a></h4>
 <p>The filter accepts an even number of variable arguments of type
 string, which are used to validate the incoming token from the
 <code>Authorization: Bearer &lt;token&gt;</code> header.  The first argument to the
@@ -4130,14 +4230,16 @@ it will allow the request to pass.</p>
 <p>Read client-id and client-secret from environment variables
 <div class="highlight"><pre><span></span><code>secureOauthTokenintrospectionAllKV(&quot;issuerURL&quot;, &quot;&quot;, &quot;&quot;, &quot;k1&quot;, &quot;v1&quot;, &quot;k2&quot;, &quot;v2&quot;)
 </code></pre></div></p>
-<h3 id="jwtvalidation">jwtValidation<a class="headerlink" href="#jwtvalidation" title="Permanent link">&para;</a></h3>
+<h3 id="jwt">jwt<a class="headerlink" href="#jwt" title="Permanent link">&para;</a></h3>
+<h4 id="jwtvalidation">jwtValidation<a class="headerlink" href="#jwtvalidation" title="Permanent link">&para;</a></h4>
 <p>The filter parses bearer jwt token from Authorization header and validates the signature using public keys
 discovered via /.well-known/openid-configuration endpoint. Takes issuer url as single parameter.
 The filter stores token claims into the state bag where they can be used by oidcClaimsQuery() or forwardTokenPart()</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>jwtValidation(&quot;https://login.microsoftonline.com/{tenantId}/v2.0&quot;)
 </code></pre></div>
-<h3 id="forwardtoken">forwardToken<a class="headerlink" href="#forwardtoken" title="Permanent link">&para;</a></h3>
+<h3 id="forward">forward<a class="headerlink" href="#forward" title="Permanent link">&para;</a></h3>
+<h4 id="forwardtoken">forwardToken<a class="headerlink" href="#forwardtoken" title="Permanent link">&para;</a></h4>
 <p>The filter takes the header name as its first argument and sets header value to the
 token info or token introspection result serialized as a JSON object.
 To include only particular fields provide their names as additional arguments.</p>
@@ -4147,7 +4249,7 @@ then it does not have any effect.</p>
 <div class="highlight"><pre><span></span><code>forwardToken(&quot;X-Tokeninfo-Forward&quot;)
 forwardToken(&quot;X-Tokeninfo-Forward&quot;, &quot;access_token&quot;, &quot;token_type&quot;)
 </code></pre></div>
-<h3 id="forwardtokenfield">forwardTokenField<a class="headerlink" href="#forwardtokenfield" title="Permanent link">&para;</a></h3>
+<h4 id="forwardtokenfield">forwardTokenField<a class="headerlink" href="#forwardtokenfield" title="Permanent link">&para;</a></h4>
 <p>The filter takes a header name and a field as its first and second arguments. The corresponding field from the result of token info, token introspection or oidc user info is added as
 corresponding header when the request is passed to the backend.</p>
 <p>If this filter is used when there is no token introspection, token info or oidc user info data
@@ -4342,8 +4444,8 @@ oauthGrant() -&gt; grantClaimsQuery(&quot;/path:scope.#[==\&quot;email\&quot;]&q
 </tr>
 </tbody>
 </table>
-<h2 id="openid-connect">OpenID Connect<a class="headerlink" href="#openid-connect" title="Permanent link">&para;</a></h2>
-<h3 id="oauthoidcuserinfo">oauthOidcUserInfo<a class="headerlink" href="#oauthoidcuserinfo" title="Permanent link">&para;</a></h3>
+<h3 id="openid-connect">openid connect<a class="headerlink" href="#openid-connect" title="Permanent link">&para;</a></h3>
+<h4 id="oauthoidcuserinfo">oauthOidcUserInfo<a class="headerlink" href="#oauthoidcuserinfo" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>oauthOidcUserInfo(&quot;https://oidc-provider.example.com&quot;, &quot;client_id&quot;, &quot;client_secret&quot;,
     &quot;http://target.example.com/subpath/callback&quot;, &quot;email profile&quot;, &quot;name email picture&quot;,
     &quot;parameter=value&quot;, &quot;X-Auth-Authorization:claims.email&quot;, &quot;0&quot;)
@@ -4361,7 +4463,7 @@ oauthGrant() -&gt; grantClaimsQuery(&quot;/path:scope.#[==\&quot;email\&quot;]&q
 <li><strong>Upstream Headers</strong> (optional) The upstream endpoint will receive these headers which values are parsed from the OIDC information. The header definition can be one or more header-query pairs, space delimited. The query syntax is <a href="https://github.com/tidwall/gjson/blob/master/SYNTAX.md">GJSON</a>.</li>
 <li><strong>SubdomainsToRemove</strong> (optional, default &ldquo;1&rdquo;) Configures number of subdomains to remove from the request hostname to derive OIDC cookie domain. By default one subdomain is removed, e.g. for the <a href="http://www.example.com">www.example.com</a> request hostname the OIDC cookie domain will be example.com (to support SSO for all subdomains of the example.com). Configure &ldquo;0&rdquo; to use the same hostname. Note that value is a string.</li>
 </ul>
-<h3 id="oauthoidcanyclaims">oauthOidcAnyClaims<a class="headerlink" href="#oauthoidcanyclaims" title="Permanent link">&para;</a></h3>
+<h4 id="oauthoidcanyclaims">oauthOidcAnyClaims<a class="headerlink" href="#oauthoidcanyclaims" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>oauthOidcAnyClaims(&quot;https://oidc-provider.example.com&quot;, &quot;client_id&quot;, &quot;client_secret&quot;,
     &quot;http://target.example.com/subpath/callback&quot;, &quot;email profile&quot;, &quot;name email picture&quot;,
     &quot;parameter=value&quot;, &quot;X-Auth-Authorization:claims.email&quot;)
@@ -4378,7 +4480,7 @@ oauthGrant() -&gt; grantClaimsQuery(&quot;/path:scope.#[==\&quot;email\&quot;]&q
 <li><strong>Auth Code Options</strong> (optional) Passes key/value parameters to a provider&rsquo;s authorization endpoint. The value can be dynamically set by a query parameter with the same key name if the placeholder <code>skipper-request-query</code> is used.</li>
 <li><strong>Upstream Headers</strong> (optional) The upstream endpoint will receive these headers which values are parsed from the OIDC information. The header definition can be one or more header-query pairs, space delimited. The query syntax is <a href="https://github.com/tidwall/gjson/blob/master/SYNTAX.md">GJSON</a>.</li>
 </ul>
-<h3 id="oauthoidcallclaims">oauthOidcAllClaims<a class="headerlink" href="#oauthoidcallclaims" title="Permanent link">&para;</a></h3>
+<h4 id="oauthoidcallclaims">oauthOidcAllClaims<a class="headerlink" href="#oauthoidcallclaims" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>oauthOidcAllClaims(&quot;https://oidc-provider.example.com&quot;, &quot;client_id&quot;, &quot;client_secret&quot;,
     &quot;http://target.example.com/subpath/callback&quot;, &quot;email profile&quot;, &quot;name email picture&quot;,
     &quot;parameter=value&quot;, &quot;X-Auth-Authorization:claims.email&quot;)
@@ -4395,7 +4497,7 @@ oauthGrant() -&gt; grantClaimsQuery(&quot;/path:scope.#[==\&quot;email\&quot;]&q
 <li><strong>Auth Code Options</strong> (optional) Passes key/value parameters to a provider&rsquo;s authorization endpoint. The value can be dynamically set by a query parameter with the same key name if the placeholder <code>skipper-request-query</code> is used.</li>
 <li><strong>Upstream Headers</strong> (optional) The upstream endpoint will receive these headers which values are parsed from the OIDC information. The header definition can be one or more header-query pairs, space delimited. The query syntax is <a href="https://github.com/tidwall/gjson/blob/master/SYNTAX.md">GJSON</a>.</li>
 </ul>
-<h3 id="oidcclaimsquery">oidcClaimsQuery<a class="headerlink" href="#oidcclaimsquery" title="Permanent link">&para;</a></h3>
+<h4 id="oidcclaimsquery">oidcClaimsQuery<a class="headerlink" href="#oidcclaimsquery" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>oidcClaimsQuery(&quot;&lt;path&gt;:[&lt;query&gt;]&quot;, ...)
 </code></pre></div>
 <p>The filter is chained after <code>oauthOidc*</code> authentication as it parses the ID token that has been saved in the internal <code>StateBag</code> for this request. It validates access control of the requested path against the defined query.
