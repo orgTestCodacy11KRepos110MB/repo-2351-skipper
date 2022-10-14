@@ -815,7 +815,8 @@
     tokeninfo
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="tokeninfo">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#oauthtokeninfoanyscope" class="md-nav__link">
@@ -842,6 +843,11 @@
   <a href="#oauthtokeninfoallkv" class="md-nav__link">
     oauthTokeninfoAllKV
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -962,6 +968,14 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#oauth" class="md-nav__link">
+    oauth
+  </a>
+  
+    <nav class="md-nav" aria-label="oauth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#oauthgrant" class="md-nav__link">
     oauthGrant
   </a>
@@ -986,6 +1000,11 @@
   <a href="#grantclaimsquery" class="md-nav__link">
     grantClaimsQuery
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2589,7 +2608,8 @@
     tokeninfo
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="tokeninfo">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#oauthtokeninfoanyscope" class="md-nav__link">
@@ -2616,6 +2636,11 @@
   <a href="#oauthtokeninfoallkv" class="md-nav__link">
     oauthTokeninfoAllKV
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2736,6 +2761,14 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#oauth" class="md-nav__link">
+    oauth
+  </a>
+  
+    <nav class="md-nav" aria-label="oauth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#oauthgrant" class="md-nav__link">
     oauthGrant
   </a>
@@ -2760,6 +2793,11 @@
   <a href="#grantclaimsquery" class="md-nav__link">
     grantClaimsQuery
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4030,7 +4068,7 @@ changed, if skipper is started with <code>-webhook-timeout=2s</code> flag.</p>
 <p>Tokeninfo handled by another service.
 The filters just validate the response from the tokeninfo
 service to do authorization as defined in the filter.</p>
-<h3 id="oauthtokeninfoanyscope">oauthTokeninfoAnyScope<a class="headerlink" href="#oauthtokeninfoanyscope" title="Permanent link">&para;</a></h3>
+<h4 id="oauthtokeninfoanyscope">oauthTokeninfoAnyScope<a class="headerlink" href="#oauthtokeninfoanyscope" title="Permanent link">&para;</a></h4>
 <p>If skipper is started with <code>-oauth2-tokeninfo-url</code> flag, you can use
 this filter.</p>
 <p>The filter accepts variable number of string arguments, which are used to
@@ -4045,7 +4083,7 @@ request to pass.</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>oauthTokeninfoAnyScope(&quot;s1&quot;, &quot;s2&quot;, &quot;s3&quot;)
 </code></pre></div>
-<h3 id="oauthtokeninfoallscope">oauthTokeninfoAllScope<a class="headerlink" href="#oauthtokeninfoallscope" title="Permanent link">&para;</a></h3>
+<h4 id="oauthtokeninfoallscope">oauthTokeninfoAllScope<a class="headerlink" href="#oauthtokeninfoallscope" title="Permanent link">&para;</a></h4>
 <p>If skipper is started with <code>-oauth2-tokeninfo-url</code> flag, you can use
 this filter.</p>
 <p>The filter accepts variable number of string arguments, which are used to
@@ -4060,7 +4098,7 @@ request to pass.</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>oauthTokeninfoAllScope(&quot;s1&quot;, &quot;s2&quot;, &quot;s3&quot;)
 </code></pre></div>
-<h3 id="oauthtokeninfoanykv">oauthTokeninfoAnyKV<a class="headerlink" href="#oauthtokeninfoanykv" title="Permanent link">&para;</a></h3>
+<h4 id="oauthtokeninfoanykv">oauthTokeninfoAnyKV<a class="headerlink" href="#oauthtokeninfoanykv" title="Permanent link">&para;</a></h4>
 <p>If skipper is started with <code>-oauth2-tokeninfo-url</code> flag, you can use
 this filter.</p>
 <p>The filter accepts an even number of variable arguments of type
@@ -4077,7 +4115,7 @@ the request to pass.</p>
 <div class="highlight"><pre><span></span><code>oauthTokeninfoAnyKV(&quot;k1&quot;, &quot;v1&quot;, &quot;k2&quot;, &quot;v2&quot;)
 oauthTokeninfoAnyKV(&quot;k1&quot;, &quot;v1&quot;, &quot;k1&quot;, &quot;v2&quot;)
 </code></pre></div>
-<h3 id="oauthtokeninfoallkv">oauthTokeninfoAllKV<a class="headerlink" href="#oauthtokeninfoallkv" title="Permanent link">&para;</a></h3>
+<h4 id="oauthtokeninfoallkv">oauthTokeninfoAllKV<a class="headerlink" href="#oauthtokeninfoallkv" title="Permanent link">&para;</a></h4>
 <p>If skipper is started with <code>-oauth2-tokeninfo-url</code> flag, you can use
 this filter.</p>
 <p>The filter accepts an even number of variable arguments of type
@@ -4258,7 +4296,8 @@ then it does not have any effect.</p>
 <p>Examples:</p>
 <div class="highlight"><pre><span></span><code>forwardTokenField(&quot;X-Tokeninfo-Forward-Oid&quot;, &quot;oid&quot;) -&gt; forwardTokenField(&quot;X-Tokeninfo-Forward-Sub&quot;, &quot;sub&quot;)
 </code></pre></div>
-<h3 id="oauthgrant">oauthGrant<a class="headerlink" href="#oauthgrant" title="Permanent link">&para;</a></h3>
+<h3 id="oauth">oauth<a class="headerlink" href="#oauth" title="Permanent link">&para;</a></h3>
+<h4 id="oauthgrant">oauthGrant<a class="headerlink" href="#oauthgrant" title="Permanent link">&para;</a></h4>
 <p>Enables authentication and authorization with an OAuth2 authorization code grant flow as
 specified by <a href="https://tools.ietf.org/html/rfc6749#section-1.3.1">RFC 6749 Section 1.3.1</a>.
 Automatically redirects unauthenticated users to log in at their provider&rsquo;s authorization
@@ -4364,7 +4403,7 @@ instructions.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="grantcallback">grantCallback<a class="headerlink" href="#grantcallback" title="Permanent link">&para;</a></h3>
+<h4 id="grantcallback">grantCallback<a class="headerlink" href="#grantcallback" title="Permanent link">&para;</a></h4>
 <p>The filter accepts authorization codes as a result of an OAuth2 authorization code grant
 flow triggered by <a href="#oauthgrant">oauthGrant</a>. It uses the code to request access and
 refresh tokens from the OAuth2 provider&rsquo;s token endpoint.</p>
@@ -4394,7 +4433,7 @@ callback:
 </tr>
 </tbody>
 </table>
-<h3 id="grantlogout">grantLogout<a class="headerlink" href="#grantlogout" title="Permanent link">&para;</a></h3>
+<h4 id="grantlogout">grantLogout<a class="headerlink" href="#grantlogout" title="Permanent link">&para;</a></h4>
 <p>The filter revokes the refresh and access tokens in the cookie set by
 <a href="#oauthgrant">oauthGrant</a>. It also deletes the cookie by setting the <code>Set-Cookie</code>
 response header to an empty value after a successful token revocation.</p>
@@ -4418,7 +4457,7 @@ response header to an empty value after a successful token revocation.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="grantclaimsquery">grantClaimsQuery<a class="headerlink" href="#grantclaimsquery" title="Permanent link">&para;</a></h3>
+<h4 id="grantclaimsquery">grantClaimsQuery<a class="headerlink" href="#grantclaimsquery" title="Permanent link">&para;</a></h4>
 <p>The filter allows defining access control rules based on claims in a tokeninfo JSON
 payload.</p>
 <p>This filter is an alias for <code>oidcClaimsQuery</code> and functions identically to it.
