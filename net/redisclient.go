@@ -360,7 +360,7 @@ func (r *RedisRingClient) SetAddrs(ctx context.Context, addrs []string) {
 	if len(addrs) == 0 {
 		return
 	}
-	r.ring.SetAddrs(ctx, createAddressMap(addrs))
+	r.ring.SetAddrs(createAddressMap(addrs))
 }
 
 func (r *RedisRingClient) Get(ctx context.Context, key string) (string, error) {
