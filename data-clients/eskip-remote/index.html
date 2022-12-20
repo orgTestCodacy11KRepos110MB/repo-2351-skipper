@@ -16,7 +16,7 @@
     
     
       
-        <title>Remote eskip file - Skipper</title>
+        <title>Remote Eskip - Skipper</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#remote-eskip-file" class="md-skip">
+        <a href="#remote-eskip" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Remote eskip file
+              Remote Eskip
             
           </span>
         </div>
@@ -210,12 +210,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Reference
@@ -351,12 +353,14 @@
           
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-10" type="checkbox" id="nav-2-10" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-10" type="checkbox" id="nav-2-10" checked>
     
     <label class="md-nav__link" for="nav-2-10">
       Data Clients
@@ -380,6 +384,28 @@
     <a href="../eskip-file/" class="md-nav__link">
       Eskip File
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Remote Eskip
+    </a>
+    
   </li>
 
         
@@ -773,31 +799,17 @@
                   </a>
                 
                 
-                <h1 id="remote-eskip-file">Remote eskip file<a class="headerlink" href="#remote-eskip-file" title="Permanent link">&para;</a></h1>
-<p>Skipper can fetch routes in eskip format over HTTP using <code>-routes-urls</code> flag.</p>
-<p>For example lets use auxiliary Skipper and its <code>/routes</code> support endpoint to serve routes:</p>
-<div class="highlight"><pre><span></span><code>cat /tmp/example.eskip 
+                <h1 id="remote-eskip">Remote eskip<a class="headerlink" href="#remote-eskip" title="Permanent link">&para;</a></h1>
+<p>Skipper can fetch routes in eskip format over HTTP:</p>
+<div class="highlight"><pre><span></span><code>curl https://opensource.zalando.com/skipper/data-clients/example.eskip
 hello: Path<span class="o">(</span><span class="s2">&quot;/hello&quot;</span><span class="o">)</span> -&gt; <span class="s2">&quot;https://www.example.org&quot;</span>
 
-skipper -routes-file<span class="o">=</span>/tmp/example.eskip
-...
-<span class="o">[</span>APP<span class="o">]</span>INFO<span class="o">[</span><span class="m">0000</span><span class="o">]</span> support listener on :9911                    
-...
+skipper -routes-urls<span class="o">=</span>https://opensource.zalando.com/skipper/data-clients/example.eskip
 
-curl http://localhost:9911/routes
-hello: Path<span class="o">(</span><span class="s2">&quot;/hello&quot;</span><span class="o">)</span>
-  -&gt; <span class="s2">&quot;https://www.example.org&quot;</span><span class="p">;</span>
-</code></pre></div>
-<p>Now we can configure another Skipper to fetch routes over HTTP using <code>-routes-urls</code> flag:</p>
-<div class="highlight"><pre><span></span><code>skipper -address<span class="o">=</span>:8080 -support-listener<span class="o">=</span>:8811 -routes-urls<span class="o">=</span>http://localhost:9911/routes
-
-curl http://localhost:8811/routes
-hello: Path<span class="o">(</span><span class="s2">&quot;/hello&quot;</span><span class="o">)</span>
-  -&gt; <span class="s2">&quot;https://www.example.org&quot;</span><span class="p">;</span>
-
-curl -s http://localhost:8080/hello <span class="p">|</span> grep title
+curl -s http://localhost:9090/hello <span class="p">|</span> grep title
     &lt;title&gt;Example Domain&lt;/title&gt;
 </code></pre></div>
+<p>You may use multiple urls separated by comma and configure url poll interval via <code>-source-poll-timeout</code> flag.</p>
                 
               
               
@@ -812,6 +824,41 @@ curl -s http://localhost:8080/hello <span class="p">|</span> grep title
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../eskip-file/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Eskip File
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../route-string/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Route String
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
