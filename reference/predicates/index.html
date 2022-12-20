@@ -455,6 +455,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#headersha256" class="md-nav__link">
+    HeaderSHA256
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -691,8 +698,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/etcd/" class="md-nav__link">
-      Etcd
+    <a href="../../data-clients/route-string/" class="md-nav__link">
+      Route String
     </a>
   </li>
 
@@ -717,8 +724,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/route-string/" class="md-nav__link">
-      Route String
+    <a href="../../data-clients/etcd/" class="md-nav__link">
+      Etcd
     </a>
   </li>
 
@@ -1239,6 +1246,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#headersha256" class="md-nav__link">
+    HeaderSHA256
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1605,6 +1619,66 @@ against the JWT value.</p>
 <div class="highlight"><pre><span></span><code>JWTPayloadAllKVRegexp(&quot;iss&quot;, &quot;^https://&quot;)
 JWTPayloadAnyKVRegexp(&quot;iss&quot;, &quot;^https://&quot;)
 </code></pre></div>
+<h3 id="headersha256">HeaderSHA256<a class="headerlink" href="#headersha256" title="Permanent link">&para;</a></h3>
+<p>Matches if SHA-256 hash of the header value (known as <a href="https://en.wikipedia.org/wiki/Pre-shared_key">pre-shared key</a> or secret)
+equals to any of the configured hash values.
+Several hash values could be used to match multiple secrets e.g. during secret rotation.</p>
+<p>Hash values only hide secrets from parties that have access to the source of Skipper routes.
+Authentication strength depends on the strength of the secret value so e.g.
+<code>HeaderSHA256("X-Secret", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b")</code>
+is not stronger than just <code>Header("X-Secret", "secret")</code>.</p>
+<p>The secret value must be kept secret, must be used by a single client and must be rotated periodically.
+See below how to generate random secret value using <a href="https://www.openssl.org/docs/man1.1.1/man1/rand.html">OpenSSL</a>.</p>
+<p>Parameters:</p>
+<ul>
+<li>header name (string)</li>
+<li>one or more hex-encoded SHA-256 hashes of the matching header values (string)</li>
+</ul>
+<p>Secure secret value example:
+<div class="highlight"><pre><span></span><code><span class="c1">#</span>
+<span class="c1"># 1. Generate cryptographically secure pseudo random secret header value:</span>
+<span class="c1"># - length of at least 32 bytes (the size of the SHA-256 output)</span>
+<span class="c1"># - encode as -base64 or -hex to get ASCII text value</span>
+<span class="c1">#</span>
+<span class="nv">SECRET</span><span class="o">=</span><span class="k">$(</span>openssl rand -base64 <span class="m">32</span><span class="k">)</span>
+<span class="nb">echo</span> <span class="nv">$SECRET</span>
+3YchPsliGjBXvyl/ncLWEI8/loKGrj/VNM4garxWEmA<span class="o">=</span>
+
+<span class="c1">#</span>
+<span class="c1"># 2. Get SHA-256 hash of the secret header value to use as HeaderSHA256 argument:</span>
+<span class="c1"># - use echo -n to not output the trailing newline</span>
+<span class="c1">#</span>
+<span class="nb">echo</span> -n <span class="nv">$SECRET</span> <span class="p">|</span> sha256sum
+a6131ba920df753c8109500cc11818f7192336d06532f6fa13009c2e4f6e1841  -
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>// 3. Configure route to match hash of the secret value
+HeaderSHA256(
+    &quot;X-Secret&quot;,
+    &quot;a6131ba920df753c8109500cc11818f7192336d06532f6fa13009c2e4f6e1841&quot;
+) -&gt; inlineContent(&quot;ok\n&quot;) -&gt; &lt;shunt&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 4. Test secret value</span>
+curl -H <span class="s2">&quot;X-Secret: </span><span class="nv">$SECRET</span><span class="s2">&quot;</span> http://localhost:9090
+</code></pre></div></p>
+<p>Secret rotation example:
+<div class="highlight"><pre><span></span><code>// To rotate secret:
+// * add new secret - both old and new secrets match during rotation
+// * update client to use new secret
+// * remove old secret
+HeaderSHA256(
+    &quot;X-Secret&quot;,
+    &quot;cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4&quot;, // SHA256(&quot;old&quot;)
+    &quot;11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437&quot;  // SHA256(&quot;new&quot;)
+) -&gt; inlineContent(&quot;ok\n&quot;) -&gt; &lt;shunt&gt;
+</code></pre></div></p>
+<p><a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic access authentication</a> example:
+<div class="highlight"><pre><span></span><code>anon: * -&gt; setResponseHeader(&quot;WWW-Authenticate&quot;, `Basic realm=&quot;foo&quot;, charset=&quot;UTF-8&quot;`) -&gt; status(401) -&gt; &lt;shunt&gt;;
+auth: HeaderSHA256(
+    &quot;Authorization&quot;,
+    &quot;caae07e42ed8d231a58edcde95782b0feb67186172c18c89894ce4c2174df137&quot;, // SHA256(&quot;Basic &quot; + BASE64(&quot;test:123£&quot;))
+    &quot;157da8472590f0ce0a7c651bd79aecb5cc582944fcf76cbabada915d333deee8&quot;  // SHA256(&quot;Basic &quot; + BASE64(&quot;Aladdin:open sesame&quot;))
+) -&gt; inlineContent(&quot;ok\n&quot;) -&gt; &lt;shunt&gt;;
+</code></pre></div></p>
 <h2 id="interval">Interval<a class="headerlink" href="#interval" title="Permanent link">&para;</a></h2>
 <p>An interval implements custom predicates to match routes only during some period of time.</p>
 <p>There are three predicates: Between, Before and After. All

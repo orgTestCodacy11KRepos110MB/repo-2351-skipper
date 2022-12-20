@@ -403,8 +403,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../etcd/" class="md-nav__link">
-      Etcd
+    <a href="../route-string/" class="md-nav__link">
+      Route String
     </a>
   </li>
 
@@ -429,8 +429,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../route-string/" class="md-nav__link">
-      Route String
+    <a href="../etcd/" class="md-nav__link">
+      Etcd
     </a>
   </li>
 
@@ -791,7 +791,7 @@
 from an eskip file. The <a href="https://godoc.org/github.com/zalando/skipper/eskip">file format eskip</a>
 shows your route definitions in a clear way:</p>
 <div class="highlight"><pre><span></span><code>% cat example.eskip
-hello: Path(&quot;/hello&quot;) -&gt; &quot;https://www.example.org&quot;&#39;
+hello: Path(&quot;/hello&quot;) -&gt; &quot;https://www.example.org&quot;
 </code></pre></div>
 <p>The <a href="https://github.com/zalando/skipper">Skipper project</a> has two
 binaries, one is <code>skipper</code>, the other is <code>eskip</code>.
@@ -871,7 +871,7 @@ baiduPathMatch, googleWildcardMatch and yandexWildcardIfCookie.</p>
 description, in <a href="https://godoc.org/github.com/zalando/skipper/filters">filters</a>
 and in <a href="https://godoc.org/github.com/zalando/skipper/predicates">predicates</a>.</p>
 <p>Eskip file format is also used if you print your current routes in skipper,
-for example (metrics listener required):</p>
+for example:</p>
 <div class="highlight"><pre><span></span><code>% curl localhost:9911/routes
 *
   -&gt; setResponseHeader(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;)
@@ -911,13 +911,13 @@ for example (metrics listener required):</p>
           </a>
         
         
-          <a href="../etcd/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../route-string/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Etcd
+                Route String
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

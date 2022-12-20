@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://opensource.zalando.com/skipper/reference/architecture/">
+        <link rel="canonical" href="https://opensource.zalando.com/skipper/data-clients/eskip-remote/">
       
       <link rel="shortcut icon" href="../../favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
-        <title>Architecture - Skipper</title>
+        <title>Remote eskip file - Skipper</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture" class="md-skip">
+        <a href="#remote-eskip-file" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Architecture
+              Remote eskip file
             
           </span>
         </div>
@@ -210,14 +210,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
     
     <label class="md-nav__link" for="nav-2">
       Reference
@@ -238,7 +236,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../filters/" class="md-nav__link">
+    <a href="../../reference/filters/" class="md-nav__link">
       Filters
     </a>
   </li>
@@ -251,7 +249,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../predicates/" class="md-nav__link">
+    <a href="../../reference/predicates/" class="md-nav__link">
       Predicates
     </a>
   </li>
@@ -264,7 +262,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../backends/" class="md-nav__link">
+    <a href="../../reference/backends/" class="md-nav__link">
       Backends
     </a>
   </li>
@@ -277,7 +275,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../egress/" class="md-nav__link">
+    <a href="../../reference/egress/" class="md-nav__link">
       Egress
     </a>
   </li>
@@ -290,7 +288,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../scripts/" class="md-nav__link">
+    <a href="../../reference/scripts/" class="md-nav__link">
       Scripts
     </a>
   </li>
@@ -303,7 +301,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../plugins/" class="md-nav__link">
+    <a href="../../reference/plugins/" class="md-nav__link">
       Plugins
     </a>
   </li>
@@ -314,69 +312,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Architecture
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../reference/architecture/" class="md-nav__link">
       Architecture
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#route-processing" class="md-nav__link">
-    Route processing
-  </a>
-  
-    <nav class="md-nav" aria-label="Route processing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#routing-mechanism" class="md-nav__link">
-    Routing mechanism
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#route-matching" class="md-nav__link">
-    Route matching
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -387,7 +327,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../development/" class="md-nav__link">
+    <a href="../../reference/development/" class="md-nav__link">
       Development
     </a>
   </li>
@@ -437,7 +377,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/eskip-file/" class="md-nav__link">
+    <a href="../eskip-file/" class="md-nav__link">
       Eskip File
     </a>
   </li>
@@ -450,7 +390,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/route-string/" class="md-nav__link">
+    <a href="../route-string/" class="md-nav__link">
       Route String
     </a>
   </li>
@@ -463,7 +403,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/kubernetes/" class="md-nav__link">
+    <a href="../kubernetes/" class="md-nav__link">
       Kubernetes
     </a>
   </li>
@@ -476,7 +416,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/etcd/" class="md-nav__link">
+    <a href="../etcd/" class="md-nav__link">
       Etcd
     </a>
   </li>
@@ -818,41 +758,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#route-processing" class="md-nav__link">
-    Route processing
-  </a>
-  
-    <nav class="md-nav" aria-label="Route processing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#routing-mechanism" class="md-nav__link">
-    Routing mechanism
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#route-matching" class="md-nav__link">
-    Route matching
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -863,133 +768,36 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/zalando/skipper/edit/master/docs/reference/architecture.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/zalando/skipper/edit/master/docs/data-clients/eskip-remote.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
-<p>Skipper is written as a library and is also a multi binary project with
-2 binaries, named <code>skipper</code> and <code>eskip</code>. <code>Skipper</code> is the HTTP proxy
-and <code>eskip</code> is a CLI application to verify, print, update or delete
-Skipper routes.</p>
-<p>Skipper&rsquo;s internal architecture is split into different packages. The
-<code>skipper</code> package has connections to multiple <code>dataclient</code>, that pull
-information from different sources, for example static routes from an
-eskip file or dynamic routes from Kubernetes ingress objects.</p>
-<p>The <code>proxy</code> package gets the routes populated by skipper and has
-always a current routing table which will be replaced on change.</p>
-<p>A route is one entry in the routing table. A route consists of one or
-more <code>predicate</code>, that are used to find a route for a given HTTP
-request. A route can also have one or more <code>filter</code>, that can modify
-the content of the request or response.  A route can point to a
-backend, it can be a <code>&lt;shunt&gt;</code>, meaning that skipper serves the requests
-for the route, a <code>&lt;loopback&gt;</code>, meaning that the requests will be
-matched against the routing table again after filters have modified
-them, or a <code>&lt;dynamic&gt;</code>, meaning that the target url can be set dynamically 
-by a filter (e.g. <a href="../filters/#setdynamicbackendurl">setDynamicBackendUrl</a>). </p>
-<p><a href="http://opentracing.io/">Opentracing API</a> is supported via
-<a href="https://github.com/skipper-plugins/opentracing">skipper-plugins</a>. For
-example <a href="https://github.com/jaegertracing/jaeger">Jaeger</a> is supported.</p>
-<p>Skipper has a rich set of metrics that are exposed as json, but can be
-exported in <a href="https://prometheus.io">Prometheus</a> format.</p>
-<p><img alt="Skipper's architecture " src="../../img/architecture.svg" /></p>
-<h2 id="route-processing">Route processing<a class="headerlink" href="#route-processing" title="Permanent link">&para;</a></h2>
-<p>Package <code>skipper</code> has a Go <code>http.Server</code> and does the <code>ListenAndServe</code>
-call with the <code>loggingHandler</code> wrapped <code>proxy</code>.  The <code>loggingHandler</code>
-is basically a middleware for the <code>proxy</code> providing access logs and
-both implement the plain Go <a href="https://golang.org/pkg/net/http/#Handler">http.Handler interface</a>.</p>
-<p>For each incoming <code>http.Request</code> the <code>proxy</code> will create a request
-context and enhance it with an <a href="http://opentracing.io/">Opentracing API</a> Span.
-It will check proxy global ratelimits first and after that lookup the
-route in the routing table. After that skipper will apply all request
-filters, that can modify the <code>http.Request</code>. It will then check the
-route local ratelimits, the circuitbreakers and do the backend
-call. If the backend call got a TCP or TLS connection error in a
-loadbalanced route, skipper will do a retry to another backend of that
-loadbalanced group automatically. Just before the response to the
-caller, skipper will process the response filters, that can change the
-<code>http.Response</code>.</p>
-<p>In two special cases, skipper doesn&rsquo;t forward the request to the
-backend. When the route is shunted (<code>&lt;shunt&gt;</code>), skipper serves the
-request alone, by using only the filters. When the route is a
-<code>&lt;loopback&gt;</code>, the request is passed to the routing table for finding
-another route, based on the changes that the filters made to the
-request.</p>
-<p><img alt="Skipper's request and response processing " src="../../img/req-and-resp-processing.svg" /></p>
-<h4 id="routing-mechanism">Routing mechanism<a class="headerlink" href="#routing-mechanism" title="Permanent link">&para;</a></h4>
-<p>The routing executes the following steps in the typical case:</p>
-<ol>
-<li>
-<p>Select the best fitting route by matching the request against the
-   predicates. When no route found, respond with 404 (unless the default
-   status code is configured to a different value).</p>
-</li>
-<li>
-<p>Execute the filters defined in the route in normal order on the
-   request. The filters may or may not alter the request.</p>
-</li>
-<li>
-<p>Forward the request to the backend defined by the route and receive
-   a response.</p>
-</li>
-<li>
-<p>Execute the filters defined in the route in reverse order on the
-   response. The filters may or may not alter the response.</p>
-</li>
-<li>
-<p>Respond to the incoming request with the resulting response.</p>
-</li>
-</ol>
-<h4 id="route-matching">Route matching<a class="headerlink" href="#route-matching" title="Permanent link">&para;</a></h4>
-<p>Skipper can handle a relatively large number of routes with acceptable
-performance, while being able to use any attribute of the incoming HTTP
-requests to distinguish between them. In order to be able to do so, the
-path matching predicates (<code>Path()</code> and <code>PathSubtree()</code> but not <code>PathRegexp()</code>)
-have a special role during route matching, which is a tradeoff by
-design, and needs to be kept in mind to understand in some cases why a
-certain route was matched for a request instead of another.</p>
-<p>The route matching logic can be summed up as follows:</p>
-<ol>
-<li>
-<p>Lookup in the path tree based on the <code>Path()</code> and the <code>PathSubtree()</code>
-   predicates, using the path component of the incoming request&rsquo;s URI. Then
-   the remaining predicates of the found route(s) are evaluated.</p>
-<ul>
-<li>
-<p>the path lookup is a radix tree with O(log(n)) time complexity</p>
-</li>
-<li>
-<p>in case of intersecting paths, the more specific path is matched in
- the tree</p>
-</li>
-<li>
-<p><code>PathRegexp()</code> is not used in the tree, but it is evaluated only after
- <code>Path()</code> or <code>PathSubtree()</code>, just like e.g. <code>Method()</code> or <code>Host()</code>.</p>
-</li>
-</ul>
-</li>
-<li>
-<p><em>If</em> step #1 matches multiple routes, which means there are multiple
-   routes in the same position of the path tree, and all other predicates
-   match the request, too, then the route with the highest 
-   <a href="../predicates/#weight">weight</a> is matched.</p>
-<ul>
-<li>
-<p>this is an O(n) lookup, but only on the same leaf</p>
-</li>
-<li>
-<p>the root of the tree is considered a single leaf, so if not using the
-  <code>Path()</code> or <code>PathSubtree()</code> predicates, the entire lookup will become O(n)
-  over all the routes.</p>
-</li>
-</ul>
-</li>
-<li>
-<p><em>If</em> #2 results in multiple matching routes, then one route will be
-   selected. It is unspecified which one.</p>
-</li>
-</ol>
+                <h1 id="remote-eskip-file">Remote eskip file<a class="headerlink" href="#remote-eskip-file" title="Permanent link">&para;</a></h1>
+<p>Skipper can fetch routes in eskip format over HTTP using <code>-routes-urls</code> flag.</p>
+<p>For example lets use auxiliary Skipper and its <code>/routes</code> support endpoint to serve routes:</p>
+<div class="highlight"><pre><span></span><code>cat /tmp/example.eskip 
+hello: Path<span class="o">(</span><span class="s2">&quot;/hello&quot;</span><span class="o">)</span> -&gt; <span class="s2">&quot;https://www.example.org&quot;</span>
+
+skipper -routes-file<span class="o">=</span>/tmp/example.eskip
+...
+<span class="o">[</span>APP<span class="o">]</span>INFO<span class="o">[</span><span class="m">0000</span><span class="o">]</span> support listener on :9911                    
+...
+
+curl http://localhost:9911/routes
+hello: Path<span class="o">(</span><span class="s2">&quot;/hello&quot;</span><span class="o">)</span>
+  -&gt; <span class="s2">&quot;https://www.example.org&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Now we can configure another Skipper to fetch routes over HTTP using <code>-routes-urls</code> flag:</p>
+<div class="highlight"><pre><span></span><code>skipper -address<span class="o">=</span>:8080 -support-listener<span class="o">=</span>:8811 -routes-urls<span class="o">=</span>http://localhost:9911/routes
+
+curl http://localhost:8811/routes
+hello: Path<span class="o">(</span><span class="s2">&quot;/hello&quot;</span><span class="o">)</span>
+  -&gt; <span class="s2">&quot;https://www.example.org&quot;</span><span class="p">;</span>
+
+curl -s http://localhost:8080/hello <span class="p">|</span> grep title
+    &lt;title&gt;Example Domain&lt;/title&gt;
+</code></pre></div>
                 
               
               
@@ -1004,41 +812,6 @@ certain route was matched for a request instead of another.</p>
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../plugins/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Plugins
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../development/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Development
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

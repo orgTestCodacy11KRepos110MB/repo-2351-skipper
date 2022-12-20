@@ -390,8 +390,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/etcd/" class="md-nav__link">
-      Etcd
+    <a href="../../data-clients/route-string/" class="md-nav__link">
+      Route String
     </a>
   </li>
 
@@ -416,8 +416,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data-clients/route-string/" class="md-nav__link">
-      Route String
+    <a href="../../data-clients/etcd/" class="md-nav__link">
+      Etcd
     </a>
   </li>
 
@@ -1272,7 +1272,8 @@ special case, for example kubernetes dataclient automatically adds
 HTTP-&gt;HTTPS redirects if skipper is started with <code>-kubernetes-https-redirect</code>.</p>
 <p>Dataclients:</p>
 <ul>
-<li><a href="../../data-clients/eskip-file/">eskip-file</a></li>
+<li><a href="../../data-clients/eskip-file/">eskip file</a></li>
+<li><a href="../../data-clients/eskip-remote/">remote eskip</a></li>
 <li><a href="../../data-clients/route-string/">route string</a></li>
 <li><a href="../../data-clients/kubernetes/">kubernetes</a></li>
 <li><a href="../../data-clients/etcd/">etcd</a></li>
@@ -1398,7 +1399,6 @@ tree of <code>routing.Route</code> will be used to match an incoming Request to 
    are handled by the new routing table</li>
 </ol>
 <h2 id="building-skipper">Building skipper<a class="headerlink" href="#building-skipper" title="Permanent link">&para;</a></h2>
-<p>We use Go modules to build skipper, therefore you need <a href="https://golang.org/dl">Go</a> version <code>&gt;= 1.11</code>.</p>
 <h3 id="local-build">Local build<a class="headerlink" href="#local-build" title="Permanent link">&para;</a></h3>
 <p>To get a local build of skipper for your CPU architecture, you can run
 <code>make skipper</code>. To cross compile to non Linux platforms you can use:</p>
